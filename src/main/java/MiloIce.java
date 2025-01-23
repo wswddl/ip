@@ -37,13 +37,14 @@ public class MiloIce {
             try {
                 input = scanner.nextLine();
                 String[] parts = input.split(" ");
+                Command cmd = Command.of(input);
 
-                if (input.equals("bye")) {
+                if (cmd == Command.BYE) {
                     printStraightLine();
                     System.out.println("Bye. Hope to see you again soon!");
                     printStraightLine();
                     break;
-                } else if (input.equals("list")) {
+                } else if (cmd == Command.LIST) {
                     printStraightLine();
                     int idx = 1;
                     for (Task task : taskList) {
@@ -51,7 +52,7 @@ public class MiloIce {
                         idx++;
                     }
                     printStraightLine();
-                } else if (parts[0].equals("delete")) {
+                } else if (cmd == Command.DELETE) {
                     if (parts.length != 2) {
                         throw new MiloIceException("Invalid input, correct example: delete 1");
                     }
@@ -67,7 +68,7 @@ public class MiloIce {
                         System.out.println("Now you have " + taskList.size() + " task(s) in the list");
                         printStraightLine();
                     }
-                } else if (parts[0].equals("mark")) {
+                } else if (cmd == Command.MARK) {
                     if (parts.length != 2) {
                         throw new MiloIceException("Invalid input, correct example: mark 1");
                     }
@@ -86,7 +87,7 @@ public class MiloIce {
                         printStraightLine();
                     }
 
-                } else if (parts[0].equals("unmark")) {
+                } else if (cmd == Command.UNMARK) {
                     if (parts.length != 2) {
                         throw new MiloIceException("Invalid input, correct example: unmark 1");
                     }
@@ -105,7 +106,7 @@ public class MiloIce {
                         printStraightLine();
                     }
 
-                } else if (parts[0].equals("todo")) {
+                } else if (cmd == Command.TODO) {
                     int byIdx = input.indexOf("/by");
                     int fromIdx = input.indexOf("/from");
                     int toIdx = input.indexOf("/to");
@@ -125,7 +126,7 @@ public class MiloIce {
                         System.out.println("Now you have " + taskList.size() + " task(s) in the list");
                         printStraightLine();
                     }
-                } else if (parts[0].equals("deadline")) {
+                } else if (cmd == Command.DEADLINE) {
                     int byIdx = input.indexOf(" /by ");
 
                     if (byIdx != -1) {
@@ -147,7 +148,7 @@ public class MiloIce {
                                 "Please specify the deadline using '/by'\n" +
                                 "Example: deadline finish cs2103t project /by [time]");
                     }
-                } else if (parts[0].equals("event")) {
+                } else if (cmd == Command.EVENT) {
                     int fromIdx = input.indexOf(" /from ");
                     int toIdx = input.indexOf(" /to ");
                     if (fromIdx != -1 && toIdx != -1) {
@@ -171,7 +172,7 @@ public class MiloIce {
                                         "Example: event [description] /from [start] /to [end]");
                     }
 
-                } else {
+                } else { // Command.UNKNOWN
                     throw new MiloIceException("""
                             Sorry, I don't understand your request
                             Here's what I can do for you:
