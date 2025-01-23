@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MiloIce {
+
+    private static ArrayList<String> storedInputsArr = new ArrayList<>();
 
     public static void printStraightLine() {
         int lineLength = 50;
@@ -33,9 +36,18 @@ public class MiloIce {
                 System.out.println("Bye. Hope to see you again soon!");
                 printStraightLine();
                 break;
-            } else {
+            } else if (input.equals("list")) {
                 printStraightLine();
-                System.out.println(input); // echo
+                int idx = 1;
+                for (String storedInput : storedInputsArr) {
+                    System.out.println(idx + ". " + storedInput);
+                    idx++;
+                }
+                printStraightLine();
+            } else {
+                storedInputsArr.add(input);
+                printStraightLine();
+                System.out.println("added: " + input); // echo
                 printStraightLine();
             }
         }
