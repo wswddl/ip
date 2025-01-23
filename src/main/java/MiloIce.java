@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class MiloIce {
 
-    private static ArrayList<String> storedInputsArr = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void printStraightLine() {
         int lineLength = 50;
@@ -29,8 +29,11 @@ public class MiloIce {
         // Scanning for input
         Scanner scanner = new Scanner(System.in);
         String input;
+
         while (true) {
             input = scanner.nextLine();
+            String[] parts = input.split(" ");
+
             if (input.equals("bye")) {
                 printStraightLine();
                 System.out.println("Bye. Hope to see you again soon!");
@@ -39,13 +42,39 @@ public class MiloIce {
             } else if (input.equals("list")) {
                 printStraightLine();
                 int idx = 1;
-                for (String storedInput : storedInputsArr) {
-                    System.out.println(idx + ". " + storedInput);
+                for (Task task : taskList) {
+                    System.out.println(idx + "." + task);
                     idx++;
                 }
                 printStraightLine();
+            } else if (parts.length == 2 && parts[0].equals("mark")) {
+                int idx = Integer.parseInt(parts[1]);
+                if (idx >= 1 && idx <= taskList.size()) {
+                    Task task = taskList.get(idx - 1);
+                    task.markAsDone();
+                    printStraightLine();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("  " + task);
+                    printStraightLine();
+                } else {
+                    System.out.println("Invalid index");
+                }
+
+            } else if (parts.length == 2 && parts[0].equals("unmark")) {
+                int idx = Integer.parseInt(parts[1]);
+                if (idx >= 1 && idx <= taskList.size()) {
+                    Task task = taskList.get(idx - 1);
+                    task.unMarkAsDone();
+                    printStraightLine();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("  " + task);
+                    printStraightLine();
+                } else {
+                    System.out.println("Invalid index");
+                }
+
             } else {
-                storedInputsArr.add(input);
+                taskList.add(new Task(input));
                 printStraightLine();
                 System.out.println("added: " + input); // echo
                 printStraightLine();
@@ -54,3 +83,4 @@ public class MiloIce {
         scanner.close();
     }
 }
+
