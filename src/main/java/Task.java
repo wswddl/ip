@@ -14,11 +14,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getStatusIcon() {
+        return isDone ? "X" : " ";
+    }
+
     public String toString() {
-        if (this.isDone) {
-            return "[X] " + this.description;
-        } else {
-            return "[ ] " + this.description;
-        }
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
