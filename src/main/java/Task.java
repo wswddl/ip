@@ -6,12 +6,20 @@ public class Task {
         this.description = description;
     }
 
-    public void markAsDone() {
+    public boolean markAsDone() {
+        if (this.isDone) {
+            return false;
+        }
         this.isDone = true;
+        return true;
     }
 
-    public void unMarkAsDone() {
+    public boolean unMarkAsDone() {
+        if (!this.isDone) {
+            return false;
+        }
         this.isDone = false;
+        return true;
     }
 
     public String getStatusIcon() {
