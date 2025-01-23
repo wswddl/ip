@@ -51,6 +51,22 @@ public class MiloIce {
                         idx++;
                     }
                     printStraightLine();
+                } else if (parts[0].equals("delete")) {
+                    if (parts.length != 2) {
+                        throw new MiloIceException("Invalid input, correct example: delete 1");
+                    }
+
+                    int idx = Integer.parseInt(parts[1]); // might throw NumberFormatException
+                    if (idx < 1 || idx > taskList.size()) {
+                        throw new MiloIceException("Invalid index: there are only " + taskList.size() + " task(s)");
+                    } else {
+                        Task removedTask = taskList.remove(idx - 1);
+                        printStraightLine();
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("  " + removedTask);
+                        System.out.println("Now you have " + taskList.size() + " task(s) in the list");
+                        printStraightLine();
+                    }
                 } else if (parts[0].equals("mark")) {
                     if (parts.length != 2) {
                         throw new MiloIceException("Invalid input, correct example: mark 1");
@@ -58,7 +74,7 @@ public class MiloIce {
 
                     int idx = Integer.parseInt(parts[1]); // might throw NumberFormatException
                     if (idx < 1 || idx > taskList.size()) {
-                        throw new MiloIceException("Invalid index. there are only " + taskList.size() + " task(s)");
+                        throw new MiloIceException("Invalid index: there are only " + taskList.size() + " task(s)");
                     } else {
                         Task task = taskList.get(idx - 1);
                         if (!task.markAsDone()) {
@@ -77,7 +93,7 @@ public class MiloIce {
 
                     int idx = Integer.parseInt(parts[1]);
                     if (idx < 1 || idx > taskList.size()) {
-                        throw new MiloIceException("Invalid index. there are only " + taskList.size() + " task(s)");
+                        throw new MiloIceException("Invalid index: there are only " + taskList.size() + " task(s)");
                     } else {
                         Task task = taskList.get(idx - 1);
                         if (!task.unMarkAsDone()) {

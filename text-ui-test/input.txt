@@ -15,4 +15,10 @@ unmark 4
 mark 1a
 mark 1
 list
+delete 1a
+delete 4
+delete 1
+delete 2
+delete 1
+delete 1
 bye
