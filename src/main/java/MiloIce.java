@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class MiloIce {
 
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static final ArrayList<Task> taskList = new ArrayList<>();
 
     /*
      * Print 50 wide underscored dashed line
@@ -18,12 +18,12 @@ public class MiloIce {
 
     public static void main(String[] args) {
 
-        String logo = " __    __   __   __        ____       _______    _____   ______        \n"
-             + "|  \\  /  | |  | |  |      / __ \\     |__   __|  /   __| |  ____|       \n"
-             + "|   \\/   | |  | |  |     | /  \\ |       | |    |   /    | |____        \n"
-             + "|   ||   | |  | |  |     | |  | |       | |    |  |     |  ____|       \n"
-             + "|   ||   | |  | |  |___  | \\__/ |     __| |__  |   \\__  | |____        \n"
-             + "|___||___| |__| |______|  \\____/     |_______|  \\_____| |______|       ";
+        String logo = " __    __   __   __        ____       _______    _____   ______\n"
+             + "|  \\  /  | |  | |  |      / __ \\     |__   __|  /   __| |  ____|    \n"
+             + "|   \\/   | |  | |  |     | /  \\ |       | |    |   /    | |____     \n"
+             + "|   ||   | |  | |  |     | |  | |       | |    |  |     |  ____|      \n"
+             + "|   ||   | |  | |  |___  | \\__/ |     __| |__  |   \\__  | |____     \n"
+             + "|___||___| |__| |______|  \\____/     |_______|  \\_____| |______|      ";
         System.out.println(logo);
         printStraightLine();
         System.out.println("Hello! I'm Milo Ice\n" + "What can I do for you?");
@@ -113,7 +113,7 @@ public class MiloIce {
                     String description = input.substring(5).trim();
                     if (description.isEmpty()) {
                         throw new MiloIceException("Invalid input: description of todo cannot be empty");
-                    } // dont allow /by /from /to in Todo
+                    } // dont allow /by /from /to in To_do
                     else if (byIdx != -1 || fromIdx != -1 || toIdx != -1) {
                         throw new MiloIceException("Invalid input: Todo should not contain '/by', '/from', '/to'");
                     } else {
