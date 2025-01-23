@@ -5,6 +5,9 @@ public class MiloIce {
 
     private static ArrayList<Task> taskList = new ArrayList<>();
 
+    /*
+     * Print 50 wide underscored dashed line
+     */
     public static void printStraightLine() {
         int lineLength = 50;
         for (int i = 0; i < lineLength; i++) {

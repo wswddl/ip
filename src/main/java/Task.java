@@ -6,6 +6,11 @@ public class Task {
         this.description = description;
     }
 
+    /*
+     * set isDone to true
+     *
+     * @return true if isDone was false, false if isDone was true
+     */
     public boolean markAsDone() {
         if (this.isDone) {
             return false;
@@ -14,6 +19,11 @@ public class Task {
         return true;
     }
 
+    /*
+     * set isDone to false
+     *
+     * @return true if isDone was true, false if isDone was false
+     */
     public boolean unMarkAsDone() {
         if (!this.isDone) {
             return false;
@@ -22,10 +32,16 @@ public class Task {
         return true;
     }
 
+    /*
+     * get the isDone status of the task in String format
+     *
+     * @return "X" if isDone is true, " " if isDone is false
+     */
     public String getStatusIcon() {
         return isDone ? "X" : " ";
     }
 
+    @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
