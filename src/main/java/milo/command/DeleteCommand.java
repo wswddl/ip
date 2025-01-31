@@ -12,13 +12,10 @@ import milo.task.TaskList;
  * to storage.
  */
 public class DeleteCommand extends Command {
-
     private final int deleteIndex;
-
     public DeleteCommand(int deleteIndex) {
         this.deleteIndex = deleteIndex;
     }
-
     /**
      * Executes the DeleteCommand by removing the task from the task list,
      * updates the UI to show the task deletion, and updates the changes to the storage.

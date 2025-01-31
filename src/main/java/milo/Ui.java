@@ -1,5 +1,6 @@
 package milo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import milo.task.Task;
@@ -28,7 +29,7 @@ public class Ui {
      * Displays the welcome message and introductory information about the application.
      */
     public void showWelcome() {
-        String logo = " __    __   __   __        ____       _______    _____   ______ \n"
+        String logo = " __    __   __   __        ____       _______    _____   ______    \n"
                 + "|  \\  /  | |  | |  |      / __ \\     |__   __|  /   __| |  ____|     \n"
                 + "|   \\/   | |  | |  |     | /  \\ |       | |    |   /    | |____      \n"
                 + "|   ||   | |  | |  |     | |  | |       | |    |  |     |  ____|       \n"
@@ -126,5 +127,25 @@ public class Ui {
         printStraightLine();
         System.out.println(errorMessage);
         printStraightLine();
+    }
+    /**
+     * Displays the tasks that match the specified keyword.
+     * If no matching tasks are found, displays a message indicating so.
+     *
+     * @param listOfTasks The list of tasks that contain the keyword.
+     */
+    public void findKeywordUi(ArrayList<Task> listOfTasks) {
+        if (!listOfTasks.isEmpty()) {
+            printStraightLine();
+            System.out.println("Here are the matching tasks in your list:");
+            int idx = 1;
+            for (Task task : listOfTasks) {
+                System.out.println(idx + "." + task);
+                idx++;
+            }
+            printStraightLine();
+        } else {
+            System.out.println("Sorry, there is no matching tasks in your list");
+        }
     }
 }

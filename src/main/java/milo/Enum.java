@@ -16,6 +16,7 @@ public enum Enum {
     DEADLINE,
     EVENT,
     DELETE,
+    FIND,
     UNKNOWN;
 
     /**
