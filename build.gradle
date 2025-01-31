@@ -5,6 +5,8 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
+mainClassName = 'milo.MiloIce'
+
 repositories {
     mavenCentral()
 }
@@ -33,7 +35,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "milo_ice.jar"
+    archiveBaseName = "milo_ice"
     archiveClassifier = null
 }
 
