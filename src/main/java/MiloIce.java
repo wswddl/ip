@@ -131,7 +131,7 @@ public class MiloIce {
                         printStraightLine();
                     }
                 } else if (cmd == Command.DEADLINE) {
-                    int byIdx = input.indexOf(" /by ");
+                    int byIdx = input.indexOf(" /by "); 
 
                     if (byIdx != -1) {
                         String description = input.substring(8, byIdx).trim();
