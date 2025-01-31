@@ -1,5 +1,7 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+package milo;
+
+import milo.command.Command;
+import milo.task.TaskList;
 
 public class MiloIce {
     private Storage storage;

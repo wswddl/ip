@@ -1,6 +1,9 @@
+package milo.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import milo.MiloIceException;
 
 public class Deadline extends Task {
 
@@ -10,7 +13,7 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    public static Deadline of(String description, boolean isDone, String stringDeadline) throws  MiloIceException {
+    public static Deadline of(String description, boolean isDone, String stringDeadline) throws MiloIceException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate deadline = LocalDate.parse(stringDeadline, formatter);

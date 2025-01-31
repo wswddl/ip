@@ -1,6 +1,17 @@
-import java.io.*;
-import java.util.ArrayList;
+package milo;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
 import java.util.Scanner;
+
+import milo.task.Deadline;
+import milo.task.Event;
+import milo.task.Task;
+import milo.task.Todo;
+import milo.task.TaskList;
 
 public class Storage {
     private final String FILE_PATH;

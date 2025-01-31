@@ -1,3 +1,5 @@
+package milo;
+
 public enum Enum {
 
     LIST,
