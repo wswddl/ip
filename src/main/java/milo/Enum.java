@@ -1,5 +1,11 @@
 package milo;
 
+/**
+ * Enum representing commands in the application.
+ * Commands include listing, marking, unmarking, adding Todo task,
+ * add Deadline task, Event task, deleting task, and exiting the application.
+ * The Enum also provides factory method to determine the correct command from a user input.
+ */
 public enum Enum {
 
     LIST,
@@ -12,12 +18,12 @@ public enum Enum {
     DELETE,
     UNKNOWN;
 
-    /*
+    /**
      * Factory method for Command.
      *
      * @return Command.BYE, Command.LIST only if the input is exactly "bye", "list".
      *         return the corresponding Command enum if the first word of the input matches the enums values,
-     *         or else return Command.UNKNOWN
+     *         or else return Command.UNKNOWN.
      */
     public static Enum of(String input) {
         String[] parts = input.split(" ");
