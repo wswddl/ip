@@ -145,7 +145,9 @@ public class Ui {
             }
             printStraightLine();
         } else {
+            printStraightLine();
             System.out.println("Sorry, there is no matching tasks in your list");
+            printStraightLine();
         }
     }
 }

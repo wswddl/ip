@@ -3,7 +3,7 @@ package milo;
 /**
  * Enum representing commands in the application.
  * Commands include listing, marking, unmarking, adding Todo task,
- * add Deadline task, Event task, deleting task, and exiting the application.
+ * add Deadline task, Event task, deleting task, finding keyword and exiting the application.
  * The Enum also provides factory method to determine the correct command from a user input.
  */
 public enum Enum {

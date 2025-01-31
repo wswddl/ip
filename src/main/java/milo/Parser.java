@@ -18,7 +18,7 @@ import milo.task.Todo;
  * A parser that processes user input and returns the appropriate Command.
  * The input is parsed into different task-related commands including
  * listing, marking, unmarking, adding Todo task,
- * Deadline task, Event task, deleting task, and exiting the application.
+ * Deadline task, Event task, deleting task, finding keyword and exiting the application.
  */
 public class Parser {
 
@@ -126,10 +126,7 @@ public class Parser {
                         + "Example: event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
             }
         } else if (inputEnum == Enum.FIND) {
-            if (parts.length != 2) {
-                throw new MiloIceException("Invalid input, correct example: find <keyword>");
-            }
-            String keyword = parts[1];
+            String keyword = input.substring(4).trim();
             return new FindCommand(keyword);
         } else {
             throw new MiloIceException("""
