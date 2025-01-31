@@ -1,8 +1,8 @@
 package milo.command;
 
+import milo.Enum;
 import milo.Storage;
 import milo.Ui;
-import milo.Enum;
 import milo.task.Task;
 import milo.task.TaskList;
 

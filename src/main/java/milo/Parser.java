@@ -1,12 +1,16 @@
 package milo;
 
-import milo.command.Command;
 import milo.command.AddCommand;
+import milo.command.Command;
 import milo.command.DeleteCommand;
-import milo.command.ListCommand;
 import milo.command.ExitCommand;
+import milo.command.ListCommand;
 import milo.command.ToggleMarkCommand;
-import milo.task.*;
+import milo.task.Deadline;
+import milo.task.Event;
+import milo.task.Task;
+import milo.task.TaskList;
+import milo.task.Todo;
 
 public class Parser {
     public static Command parse(String input, TaskList tasks) throws MiloIceException, NumberFormatException {

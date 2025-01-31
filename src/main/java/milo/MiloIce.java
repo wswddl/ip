@@ -3,7 +3,6 @@ package milo;
 import milo.command.Command;
 import milo.task.TaskList;
 
-
 public class MiloIce {
     private Storage storage;
     private TaskList tasks;

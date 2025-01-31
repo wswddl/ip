@@ -1,10 +1,10 @@
 package milo.task;
 
-import milo.MiloIceException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import milo.MiloIceException;
 
 public class Event extends Task {
 
