@@ -22,7 +22,7 @@ public class Deadline extends Task {
 
     @Override
     public String toTextFormat() {
-        String stringDeadline = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String stringDeadline = deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + stringDeadline;
     }
 

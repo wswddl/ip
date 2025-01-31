@@ -3,13 +3,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    //private final ArrayList<Task> tasks = new ArrayList<>();
-    private static final String FILE_PATH = "./data/savedTasks.txt";
-    //private final ArrayList<Task> taskList = new ArrayList<>();
+    private final String FILE_PATH;
     private final File file;
 
-    public Storage() {
-        this.file = new File(FILE_PATH);
+    public Storage(String filePath) {
+        this.FILE_PATH = filePath;
+        this.file = new File(filePath);
         File folder = new File(file.getParent());
         try {
             if (!folder.exists()) {
@@ -18,14 +17,13 @@ public class Storage {
 
             if (!file.exists()) {
                 file.createNewFile();
-                System.out.println("File created: " + FILE_PATH);
             }
         } catch (IOException e) {
             System.out.println("Error creating file: " + e.getMessage());
         }
     }
 
-    public void loadTask(ArrayList<Task> taskList) {
+    public void loadTask(TaskList tasks) {
         try {
             Scanner scanner = new Scanner(file);
             while (file.exists() && scanner.hasNextLine()) {
@@ -37,7 +35,7 @@ public class Storage {
                     String description = parts[2];
                     try {
                         Task todo = Todo.of(description, isDone);
-                        taskList.add(todo);
+                        tasks.addTask(todo);
                     } catch (MiloIceException e) {
                         System.out.println("Corrupted task detected");
                     }
@@ -47,7 +45,7 @@ public class Storage {
                     String deadline = parts[3];
                     try {
                         Task dl = Deadline.of(description, isDone, deadline);
-                        taskList.add(dl);
+                        tasks.addTask(dl);
                     } catch (MiloIceException e) {
                         System.out.println("Corrupted task detected");
                     }
@@ -58,7 +56,7 @@ public class Storage {
                     String end = parts[4];
                     try {
                         Task event = Event.of(description, isDone, start, end);
-                        taskList.add(event);
+                        tasks.addTask(event);
                     } catch (MiloIceException e) {
                         System.out.println("Corrupted task detected");
                     }
@@ -72,9 +70,9 @@ public class Storage {
         }
     }
 
-    public void updateTask(ArrayList<Task> taskList) {
+    public void updateTask(TaskList tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            for (Task task : taskList) {
+            for (Task task : tasks.getList()) {
                 writer.write(task.toTextFormat());
                 writer.newLine();
             }
@@ -83,21 +81,4 @@ public class Storage {
         }
     }
 
-
-    public static void main(String[] args) {
-        ArrayList<Task> arr = new ArrayList<>();
-        Storage storage = new Storage();
-        storage.loadTask(arr);
-        for (Task t : arr) {
-            System.out.println(t);
-        }
-        System.out.println("----------------");
-        arr.remove(0);
-        storage.updateTask(arr);
-        Task todo = new Todo("Haha", true);
-        Task todo1 = new Todo("Haha1", false);
-        arr.add(todo);
-        arr.add(todo1);
-
-    }
 }

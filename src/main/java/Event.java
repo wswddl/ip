@@ -23,14 +23,14 @@ public class Event extends Task {
             return new Event(description, isDone, start, end);
 
         } catch (DateTimeParseException e) {
-            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd] from event");
+            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd]");
         }
     }
 
     @Override
     public String toTextFormat() {
-        String stringStart = start.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        String stringEnd = end.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String stringStart = start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String stringEnd = end.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + stringStart + " | " + stringEnd;
     }
 
