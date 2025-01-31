@@ -40,7 +40,20 @@ public class Event extends Task {
     public String toString() {
         String stringStart = start.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String stringEnd = end.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        return "[E][" + this.getStatusIcon() + "] " + this.description +
-                " (from: " + stringStart + " to: " + stringEnd + ")";
+        return "[E][" + this.getStatusIcon() + "] " + this.description
+                + " (from: " + stringStart + " to: " + stringEnd + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Event) {
+            Event event = (Event) obj;
+            return this.description.equals(event.description) && this.isDone == event.isDone
+                    && this.start.equals(event.start) && this.end.equals(event.end);
+        } else {
+            return false;
+        }
     }
 }

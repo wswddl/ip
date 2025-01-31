@@ -3,6 +3,7 @@ package milo;
 import milo.command.Command;
 import milo.task.TaskList;
 
+
 public class MiloIce {
     private Storage storage;
     private TaskList tasks;
@@ -33,7 +34,7 @@ public class MiloIce {
     }
 
     public static void main(String[] args) {
-        new MiloIce("./data/savedTasks.txt").run();
+        new MiloIce("./src/main/java/data/savedTasks.txt").run();
     }
 }
 

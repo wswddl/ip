@@ -20,4 +20,17 @@ public class Todo extends Task {
     public String toString() {
         return "[T][" + this.getStatusIcon() + "] " + this.description;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Todo) {
+            Todo todo = (Todo) obj;
+            return this.description.equals(todo.description) && this.isDone == todo.isDone;
+        } else {
+            return false;
+        }
+    }
+
 }
