@@ -26,7 +26,7 @@ public abstract class Task {
      *
      * @return true if isDone was true, false if isDone was false
      */
-    public boolean unMarkAsDone() {
+    public boolean unmarkAsDone() {
         if (!this.isDone) {
             return false;
         }
