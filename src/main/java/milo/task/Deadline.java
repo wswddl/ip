@@ -34,4 +34,17 @@ public class Deadline extends Task {
         String stringDeadline = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " + stringDeadline + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Deadline) {
+            Deadline dl = (Deadline) obj;
+            return this.description.equals(dl.description) && this.isDone == dl.isDone
+                    && this.deadline.equals(dl.deadline);
+        } else {
+            return false;
+        }
+    }
 }
