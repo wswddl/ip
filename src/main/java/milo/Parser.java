@@ -1,14 +1,34 @@
 package milo;
 
-import milo.command.Command;
 import milo.command.AddCommand;
+import milo.command.Command;
 import milo.command.DeleteCommand;
-import milo.command.ListCommand;
 import milo.command.ExitCommand;
+import milo.command.ListCommand;
 import milo.command.ToggleMarkCommand;
-import milo.task.*;
+import milo.task.Deadline;
+import milo.task.Event;
+import milo.task.Task;
+import milo.task.TaskList;
+import milo.task.Todo;
 
+/**
+ * A parser that processes user input and returns the appropriate Command.
+ * The input is parsed into different task-related commands including
+ * listing, marking, unmarking, adding Todo task,
+ * Deadline task, Event task, deleting task, and exiting the application.
+ */
 public class Parser {
+
+    /**
+     * Parses the user input and returns the corresponding Command.
+     *
+     * @param input The user input to be parsed.
+     * @param tasks The current list of tasks to reference during parsing.
+     * @return The appropriate Command based on the input.
+     * @throws MiloIceException If the input is invalid or cannot be processed.
+     * @throws NumberFormatException If an invalid number is provided for task indices.
+     */
     public static Command parse(String input, TaskList tasks) throws MiloIceException, NumberFormatException {
         String[] parts = input.split(" ");
         Enum inputEnum = Enum.of(input);
@@ -83,8 +103,8 @@ public class Parser {
                 return new AddCommand(dl);
             } else {
                 throw new MiloIceException(
-                        "Please specify the deadline using '/by'\n" +
-                        "Example: deadline finish cs2103t project /by [yyyy-MM-dd]");
+                        "Please specify the deadline using '/by'\n"
+                        + "Example: deadline finish cs2103t project /by [yyyy-MM-dd]");
             }
         } else if (inputEnum == Enum.EVENT) {
             int fromIdx = input.indexOf(" /from ");
@@ -100,8 +120,8 @@ public class Parser {
                 return new AddCommand(event);
             } else {
                 throw new MiloIceException(
-                        "Please specify the start date using '/from' and end date using '/to'\n" +
-                        "Example: event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
+                        "Please specify the start date using '/from' and end date using '/to'\n"
+                        + "Example: event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
             }
         } else {
             throw new MiloIceException("""

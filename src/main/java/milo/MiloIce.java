@@ -3,12 +3,23 @@ package milo;
 import milo.command.Command;
 import milo.task.TaskList;
 
-
+/**
+ * The main application class for MiloIce. This class is responsible for
+ * managing user interactions, and handling commands to modify tasks in the task list.
+ * It interacts with the UI, storage, and task list.
+ */
 public class MiloIce {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for the MiloIce application.
+     * Initializes the UI, storage, and task list. It also loads any saved tasks
+     * from the specified file path into the task list.
+     *
+     * @param filePath the path to the file where tasks are saved
+     */
     public MiloIce(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -16,6 +27,11 @@ public class MiloIce {
         storage.loadTask(tasks);
     }
 
+    /**
+     * Starts the MiloIce application and enters the main application loop.
+     * This method continually prompts the user for input, parses the input into commands,
+     * executes the commands, and updates the UI and storage until the user exits the application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

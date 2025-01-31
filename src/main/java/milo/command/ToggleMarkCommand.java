@@ -17,7 +17,7 @@ public class ToggleMarkCommand extends Command {
 
     /**
      * Constructor for the ToggleMarkCommand class.
-     * Initializes the command with the provided task enum (MARK or UNMARK) and task index.
+     * Initializes the command with the task enum (MARK or UNMARK) and task index.
      *
      * @param taskEnum        The enum value representing whether the task should be marked or unmarked.
      * @param toggleMarkIndex The index of the task to be marked or unmarked in the task list.
