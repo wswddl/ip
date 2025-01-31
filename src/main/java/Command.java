@@ -18,7 +18,7 @@ public enum Command {
      */
     public static Command of(String input) {
         String[] parts = input.split(" ");
-        
+
         try {
             if (parts[0].equals("bye") || parts[0].equals("list")) {
                 return Command.valueOf(input.toUpperCase());

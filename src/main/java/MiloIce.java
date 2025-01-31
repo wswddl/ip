@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class MiloIce {
 
     private static final ArrayList<Task> taskList = new ArrayList<>();
+    private static final Storage storage = new Storage();
 
     /*
      * Print 50 wide underscored dashed line
@@ -33,6 +34,9 @@ public class MiloIce {
         Scanner scanner = new Scanner(System.in);
         String input;
 
+        // load up the task from hard disk into the arrayList
+        storage.loadTask(taskList);
+
         while (true) {
             try {
                 input = scanner.nextLine();
@@ -61,7 +65,7 @@ public class MiloIce {
                     if (idx < 1 || idx > taskList.size()) {
                         throw new MiloIceException("Invalid index: there are only " + taskList.size() + " task(s)");
                     } else {
-                        Task removedTask = taskList.remove(idx - 1);
+                        Task removedTask = taskList.remove(idx - 1); ///// remember to change when using TaskList
                         printStraightLine();
                         System.out.println("Noted. I've removed this task:");
                         System.out.println("  " + removedTask);
@@ -110,14 +114,14 @@ public class MiloIce {
                     int byIdx = input.indexOf("/by");
                     int fromIdx = input.indexOf("/from");
                     int toIdx = input.indexOf("/to");
-                    String description = input.substring(5).trim();
+                    String description = input.substring(4).trim();
                     if (description.isEmpty()) {
                         throw new MiloIceException("Invalid input: description of todo cannot be empty");
                     } // dont allow /by /from /to in To_do
                     else if (byIdx != -1 || fromIdx != -1 || toIdx != -1) {
                         throw new MiloIceException("Invalid input: Todo should not contain '/by', '/from', '/to'");
                     } else {
-                        Todo todo = new Todo(description);
+                        Todo todo = new Todo(description, false);
                         taskList.add(todo);
 
                         printStraightLine();
@@ -135,7 +139,7 @@ public class MiloIce {
                         if (description.isEmpty() || deadline.isEmpty()) {
                             throw new MiloIceException("Invalid input: description and deadline cannot be empty");
                         }
-                        Deadline dl = new Deadline(description, deadline);
+                        Deadline dl = new Deadline(description, false, deadline);
                         taskList.add(dl);
 
                         printStraightLine();
@@ -158,7 +162,7 @@ public class MiloIce {
                         if (description.isEmpty() || start.isEmpty() || end.isEmpty()) {
                             throw new MiloIceException("Invalid input: description, start and end cannot be empty");
                         }
-                        Event event = new Event(description, start, end);
+                        Event event = new Event(description, false, start, end);
                         taskList.add(event);
 
                         printStraightLine();
@@ -185,6 +189,10 @@ public class MiloIce {
                             6. deadline: add a task with a deadline (deadline cs2103t /by [deadline])
                             7. event: add a task with start & end time (event cs2103t /from [start] /to [end])""");
                 }
+
+                // update the hard disk after every command
+                storage.updateTask(taskList);
+
             } catch (MiloIceException e) {
                 printStraightLine();
                 System.out.println(e.getMessage());
