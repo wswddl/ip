@@ -3,6 +3,7 @@ package milo;
 import milo.task.Task;
 import milo.task.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -91,5 +92,25 @@ public class Ui {
         printStraightLine();
         System.out.println(errorMessage);
         printStraightLine();
+    }
+    /**
+     * Displays the tasks that match the specified keyword.
+     * If no matching tasks are found, displays a message indicating so.
+     *
+     * @param listOfTasks The list of tasks that contain the keyword.
+     */
+    public void findKeywordUi(ArrayList<Task> listOfTasks) {
+        if (listOfTasks.size() > 0) {
+            printStraightLine();
+            System.out.println("Here are the matching tasks in your list:");
+            int idx = 1;
+            for (Task task : listOfTasks) {
+                System.out.println(idx + "." + task);
+                idx++;
+            }
+            printStraightLine();
+        } else {
+            System.out.println("Sorry, there is no matching tasks in your list");
+        }
     }
 }

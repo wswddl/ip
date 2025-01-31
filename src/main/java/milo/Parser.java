@@ -6,6 +6,7 @@ import milo.command.DeleteCommand;
 import milo.command.ListCommand;
 import milo.command.ExitCommand;
 import milo.command.ToggleMarkCommand;
+import milo.command.FindCommand;
 import milo.task.*;
 
 public class Parser {
@@ -103,6 +104,12 @@ public class Parser {
                         "Please specify the start date using '/from' and end date using '/to'\n" +
                         "Example: event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
             }
+        } else if (inputEnum == Enum.FIND) {
+            if (parts.length != 2) {
+                throw new MiloIceException("Invalid input, correct example: find <keyword>");
+            }
+            String keyword = parts[1];
+            return new FindCommand(keyword);
         } else {
             throw new MiloIceException("""
                     Sorry, I don't understand your request
