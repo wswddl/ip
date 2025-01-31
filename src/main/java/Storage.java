@@ -1,7 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -38,26 +35,39 @@ public class Storage {
                 if (parts[0].equals("T") && parts.length == 3) {
                     boolean isDone = parts[1].equals("1");
                     String description = parts[2];
-                    Task todo = new Todo(description, isDone);
-                    taskList.add(todo);
+                    try {
+                        Task todo = Todo.of(description, isDone);
+                        taskList.add(todo);
+                    } catch (MiloIceException e) {
+                        System.out.println("Corrupted task detected");
+                    }
                 } else if (parts[0].equals("D") && parts.length == 4) {
                     boolean isDone = parts[1].equals("1");
                     String description = parts[2];
                     String deadline = parts[3];
-                    Task dl = new Deadline(description, isDone, deadline);
-                    taskList.add(dl);
+                    try {
+                        Task dl = Deadline.of(description, isDone, deadline);
+                        taskList.add(dl);
+                    } catch (MiloIceException e) {
+                        System.out.println("Corrupted task detected");
+                    }
                 } else if (parts[0].equals("E") && parts.length == 5) {
                     boolean isDone = parts[1].equals("1");
                     String description = parts[2];
                     String start = parts[3];
                     String end = parts[4];
-                    Task event = new Event(description, isDone, start, end);
-                    taskList.add(event);
+                    try {
+                        Task event = Event.of(description, isDone, start, end);
+                        taskList.add(event);
+                    } catch (MiloIceException e) {
+                        System.out.println("Corrupted task detected");
+                    }
+
                 }
                     // ignore the corrupted task and move to the next one
                     // System.out.println("corrupted");
             }
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Error creating file: " + e.getMessage());
         }
     }

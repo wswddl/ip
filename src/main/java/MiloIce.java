@@ -139,7 +139,7 @@ public class MiloIce {
                         if (description.isEmpty() || deadline.isEmpty()) {
                             throw new MiloIceException("Invalid input: description and deadline cannot be empty");
                         }
-                        Deadline dl = new Deadline(description, false, deadline);
+                        Deadline dl = Deadline.of(description, false, deadline);
                         taskList.add(dl);
 
                         printStraightLine();
@@ -162,7 +162,7 @@ public class MiloIce {
                         if (description.isEmpty() || start.isEmpty() || end.isEmpty()) {
                             throw new MiloIceException("Invalid input: description, start and end cannot be empty");
                         }
-                        Event event = new Event(description, false, start, end);
+                        Event event = Event.of(description, false, start, end);
                         taskList.add(event);
 
                         printStraightLine();
