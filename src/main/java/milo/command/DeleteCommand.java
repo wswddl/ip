@@ -1,3 +1,10 @@
+package milo.command;
+
+import milo.Storage;
+import milo.Ui;
+import milo.task.Task;
+import milo.task.TaskList;
+
 public class DeleteCommand extends Command {
 
     private int deleteIndex;

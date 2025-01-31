@@ -1,4 +1,12 @@
-import java.util.ArrayList;
+package milo;
+
+import milo.command.Command;
+import milo.command.AddCommand;
+import milo.command.DeleteCommand;
+import milo.command.ListCommand;
+import milo.command.ExitCommand;
+import milo.command.ToggleMarkCommand;
+import milo.task.*;
 
 public class Parser {
     public static Command parse(String input, TaskList tasks) throws MiloIceException, NumberFormatException {
@@ -61,7 +69,7 @@ public class Parser {
                 throw new MiloIceException("Invalid input: Todo should not contain '/by', '/from', '/to'");
             } else {
                 Todo todo = new Todo(description, false);
-                return new AddCommand(inputEnum, todo);
+                return new AddCommand(todo);
             }
         } else if (inputEnum == Enum.DEADLINE) {
             int byIdx = input.indexOf(" /by ");
@@ -72,7 +80,7 @@ public class Parser {
                     throw new MiloIceException("Invalid input: description and deadline cannot be empty");
                 }
                 Deadline dl = Deadline.of(description, false, deadline);
-                return new AddCommand(inputEnum, dl);
+                return new AddCommand(dl);
             } else {
                 throw new MiloIceException(
                         "Please specify the deadline using '/by'\n" +
@@ -89,7 +97,7 @@ public class Parser {
                     throw new MiloIceException("Invalid input: description, start and end cannot be empty");
                 }
                 Event event = Event.of(description, false, start, end);
-                return new AddCommand(inputEnum, event);
+                return new AddCommand(event);
             } else {
                 throw new MiloIceException(
                         "Please specify the start date using '/from' and end date using '/to'\n" +

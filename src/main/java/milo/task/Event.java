@@ -1,8 +1,10 @@
-import java.time.DateTimeException;
+package milo.task;
+
+import milo.MiloIceException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 public class Event extends Task {
 
@@ -15,7 +17,7 @@ public class Event extends Task {
     }
 
     public static Event of(String description, boolean isDone,
-                           String stringStart, String stringEnd) throws  MiloIceException {
+                           String stringStart, String stringEnd) throws MiloIceException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate start = LocalDate.parse(stringStart, formatter);

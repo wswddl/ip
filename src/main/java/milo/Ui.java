@@ -1,3 +1,8 @@
+package milo;
+
+import milo.task.Task;
+import milo.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {

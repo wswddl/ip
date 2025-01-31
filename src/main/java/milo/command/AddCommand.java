@@ -1,9 +1,14 @@
+package milo.command;
+
+import milo.Storage;
+import milo.Ui;
+import milo.task.Task;
+import milo.task.TaskList;
+
 public class AddCommand extends Command {
 
-    private Enum taskEnum;
     private Task addedTask;
-    public AddCommand(Enum taskEnum, Task addedTask) {
-        this.taskEnum = taskEnum;
+    public AddCommand(Task addedTask) {
         this.addedTask = addedTask;
     }
     @Override
