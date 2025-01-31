@@ -24,7 +24,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a ArrayList<Task> object.
+     * Returns an ArrayList object.
      *
      * @return the list of tasks
      */

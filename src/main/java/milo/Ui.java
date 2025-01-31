@@ -1,23 +1,20 @@
 package milo;
 
+import java.util.Scanner;
+
 import milo.task.Task;
 import milo.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Represents the user interface for interacting with the MiloIce application.
  * It handles the display of messages and the reading of user input.
  */
 public class Ui {
-
     private Scanner scanner;
-
     public Ui() {
         scanner = new Scanner(System.in);
     }
-
-    /*
+    /**
      * Print 50 wide underscored dashed line
      */
     public void printStraightLine() {
@@ -27,7 +24,6 @@ public class Ui {
         }
         System.out.println();
     }
-
     /**
      * Displays the welcome message and introductory information about the application.
      */
@@ -43,7 +39,6 @@ public class Ui {
         System.out.println("Hello! I'm Milo Ice\n" + "What can I do for you?");
         printStraightLine();
     }
-
     /**
      * Reads and returns a line of user input from the console.
      *
@@ -52,7 +47,6 @@ public class Ui {
     public String readCommand() {
         return scanner.nextLine();
     }
-
     /**
      * Displays a goodbye message when the application exits.
      */
@@ -61,13 +55,12 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
         printStraightLine();
     }
-
     /**
      * Displays the current list of tasks in the TaskList.
      *
      * @param tasks The TaskList containing the tasks to display.
      */
-    public void listTasksUi (TaskList tasks) {
+    public void listTasksUi(TaskList tasks) {
         printStraightLine();
         int idx = 1;
         for (Task task : tasks.getList()) {
@@ -76,7 +69,6 @@ public class Ui {
         }
         printStraightLine();
     }
-
     /**
      * Displays a message when a task is deleted from the TaskList.
      *
@@ -90,7 +82,6 @@ public class Ui {
         System.out.println("Now you have " + tasks.size() + " task(s) in the list");
         printStraightLine();
     }
-
     /**
      * Displays a message when a task is marked as done.
      *
@@ -102,7 +93,6 @@ public class Ui {
         System.out.println("  " + markTask);
         printStraightLine();
     }
-
     /**
      * Displays a message when a task is unmarked.
      *
@@ -114,7 +104,6 @@ public class Ui {
         System.out.println("  " + unmarkTask);
         printStraightLine();
     }
-
     /**
      * Displays a message when a task is added to the TaskList.
      *
@@ -128,7 +117,6 @@ public class Ui {
         System.out.println("Now you have " + tasks.size() + " task(s) in the list");
         printStraightLine();
     }
-
     /**
      * Displays an error message to the user.
      *

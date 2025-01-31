@@ -27,7 +27,6 @@ public class ToggleMarkCommand extends Command {
         this.toggleMarkIndex = toggleMarkIndex;
     }
 
-
     /**
      * Executes the command to mark or unmark a task based on the taskEnum value.
      * It retrieves the task from the TaskList by the toggleMarkIndex field, toggles its status
