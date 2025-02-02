@@ -64,7 +64,7 @@ public class TaskList {
     }
 
     /**
-     * Searches through the list of tasks to find all tasks that contain the specified keyword
+     * Searches through the list of tasks to find all tasks that contain the specified keyword (ignore casing)
      * in their description.
      * Iterates through each task and checks if the task's description contains
      * the given keyword. If a match is found, the task is added to the result list.
@@ -75,7 +75,9 @@ public class TaskList {
     public ArrayList<Task> findKeyword(String keyword) {
         ArrayList<Task> arr = new ArrayList<>();
         for (Task task : listOfTask) {
-            int keywordIdx = task.getDescription().indexOf(keyword);
+            String taskDescription = task.getDescription().toUpperCase();
+            keyword = keyword.toUpperCase();
+            int keywordIdx = taskDescription.indexOf(keyword);
             if (keywordIdx != -1) {
                 arr.add(task);
             }
