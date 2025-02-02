@@ -3,7 +3,7 @@ package milo.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
@@ -16,9 +16,9 @@ public class DeadlineTest {
         String description = "des";
         boolean isDone = true;
         try {
-            String stringDeadline = "2025-01-01";
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate deadline = LocalDate.parse(stringDeadline, formatter);
+            String stringDeadline = "2025-01-01 1200";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime deadline = LocalDateTime.parse(stringDeadline, formatter);
             assertEquals(new Deadline(description, isDone, deadline), Deadline.of(description, isDone, stringDeadline));
         } catch (Exception e) {
             // should not throw exception
@@ -31,11 +31,19 @@ public class DeadlineTest {
         String description = "des";
         boolean isDone = true;
         try {
-            String stringDeadline = "2025-1-1";
+            String stringDeadline = "2025-1-1 1200"; // error date format
             Deadline.of(description, isDone, stringDeadline);
             fail(); // should throw MiloIceException
         } catch (MiloIceException e) {
-            assertEquals("Invalid time format: Should be [yyyy-MM-dd]", e.getMessage());
+            assertEquals("Invalid time format: Should be [yyyy-MM-dd HHmm]", e.getMessage());
+        }
+
+        try {
+            String stringDeadline = "2025-01-01 200"; // error time format
+            Deadline.of(description, isDone, stringDeadline);
+            fail(); // should throw MiloIceException
+        } catch (MiloIceException e) {
+            assertEquals("Invalid time format: Should be [yyyy-MM-dd HHmm]", e.getMessage());
         }
     }
 
@@ -43,9 +51,9 @@ public class DeadlineTest {
     public void todoTextFormat() {
         String description = "des";
         boolean isDone = true;
-        String stringDeadline = "2025-01-01";
+        String stringDeadline = "2025-01-01 0230";
         try {
-            assertEquals("D | 1 | des | 2025-01-01",
+            assertEquals("D | 1 | des | 2025-01-01 0230",
                     Deadline.of(description, isDone, stringDeadline).toTextFormat());
         } catch (Exception e) {
             // should not throw exception

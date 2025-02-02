@@ -3,7 +3,7 @@ package milo.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
@@ -16,11 +16,11 @@ public class EventTest {
         String description = "des";
         boolean isDone = true;
         try {
-            String stringStart = "2025-01-01";
-            String stringEnd = "2025-01-02";
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate start = LocalDate.parse(stringStart, formatter);
-            LocalDate end = LocalDate.parse(stringEnd, formatter);
+            String stringStart = "2025-01-01 1200";
+            String stringEnd = "2025-01-02 1300";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime start = LocalDateTime.parse(stringStart, formatter);
+            LocalDateTime end = LocalDateTime.parse(stringEnd, formatter);
             assertEquals(new Event(description, isDone, start, end),
                     Event.of(description, isDone, stringStart, stringEnd));
         } catch (Exception e) {
@@ -34,12 +34,21 @@ public class EventTest {
         String description = "des";
         boolean isDone = true;
         try {
-            String stringStart = "2025-1-1";
-            String stringEnd = "2025-01-02";
+            String stringStart = "2025-1-1 1200"; // error date format
+            String stringEnd = "2025-01-02 1201";
             Event.of(description, isDone, stringStart, stringEnd);
             fail(); // should throw MiloIceException
         } catch (MiloIceException e) {
-            assertEquals("Invalid time format: Should be [yyyy-MM-dd]", e.getMessage());
+            assertEquals("Invalid time format: Should be [yyyy-MM-dd HHmm]", e.getMessage());
+        }
+
+        try {
+            String stringStart = "2025-01-01 201"; // error HHmm
+            String stringEnd = "2025-01-02 0201";
+            Event.of(description, isDone, stringStart, stringEnd);
+            fail(); // should throw MiloIceException
+        } catch (MiloIceException e) {
+            assertEquals("Invalid time format: Should be [yyyy-MM-dd HHmm]", e.getMessage());
         }
     }
 
@@ -47,10 +56,10 @@ public class EventTest {
     public void todoTextFormat() {
         String description = "des";
         boolean isDone = true;
-        String stringStart = "2025-01-01";
-        String stringEnd = "2025-01-02";
+        String stringStart = "2025-01-01 0200";
+        String stringEnd = "2025-01-02 0201";
         try {
-            assertEquals("D | 1 | des | 2025-01-01 | 2025-01-02",
+            assertEquals("E | 1 | des | 2025-01-01 0200 | 2025-01-02 0201",
                     Event.of(description, isDone, stringStart, stringEnd).toTextFormat());
         } catch (Exception e) {
             // should not throw exception

@@ -1,6 +1,6 @@
 package milo.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -12,7 +12,7 @@ import milo.MiloIceException;
  */
 public class Deadline extends Task {
 
-    protected LocalDate deadline;
+    protected LocalDateTime deadline;
 
     /**
      * Constructor for a Deadline task.
@@ -21,7 +21,7 @@ public class Deadline extends Task {
      * @param isDone the completion status of the task
      * @param deadline the deadline date of the task
      */
-    public Deadline(String description, boolean isDone, LocalDate deadline) {
+    public Deadline(String description, boolean isDone, LocalDateTime deadline) {
         super(description, isDone);
         this.deadline = deadline;
     }
@@ -38,11 +38,11 @@ public class Deadline extends Task {
      */
     public static Deadline of(String description, boolean isDone, String stringDeadline) throws MiloIceException {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate deadline = LocalDate.parse(stringDeadline, formatter);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime deadline = LocalDateTime.parse(stringDeadline, formatter);
             return new Deadline(description, isDone, deadline);
         } catch (DateTimeParseException e) {
-            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd]");
+            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]");
         }
     }
 
@@ -54,7 +54,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toTextFormat() {
-        String stringDeadline = deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        // deadline string should have the same format as the user input format
+        String stringDeadline = deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + stringDeadline;
     }
 
@@ -67,7 +68,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String stringDeadline = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String stringDeadline = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
         return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " + stringDeadline + ")";
     }
 
