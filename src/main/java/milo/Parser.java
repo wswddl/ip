@@ -5,6 +5,7 @@ import milo.command.Command;
 import milo.command.DeleteCommand;
 import milo.command.ExitCommand;
 import milo.command.FindCommand;
+import milo.command.GreetCommand;
 import milo.command.ListCommand;
 import milo.command.ToggleMarkCommand;
 import milo.task.Deadline;
@@ -35,7 +36,9 @@ public class Parser {
         String[] parts = input.split(" ");
         Enum inputEnum = Enum.of(input);
 
-        if (inputEnum == Enum.BYE) {
+        if (inputEnum == Enum.GREET) {
+            return new GreetCommand();
+        } else if (inputEnum == Enum.BYE) {
             return new ExitCommand();
 
         } else if (inputEnum == Enum.LIST) {

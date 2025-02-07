@@ -5,7 +5,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-mainClassName = 'milo.MiloIce'
+mainClassName = 'milo.MainWindow'
 
 repositories {
     mavenCentral()
@@ -47,7 +47,7 @@ test {
 }
 
 application {
-    mainClass.set("milo.MiloIce")
+    mainClass.set("milo.Launcher")
 }
 
 shadowJar {

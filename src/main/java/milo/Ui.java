@@ -90,7 +90,7 @@ public class Ui {
      */
     public void markTaskUi(Task markTask) {
         printStraightLine();
-        System.out.println("Nice! I've marked this task as done:");
+//        System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + markTask);
         printStraightLine();
     }

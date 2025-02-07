@@ -11,7 +11,7 @@ import milo.task.TaskList;
  */
 public class ListCommand extends Command {
 
-    private String commandResponse;
+    private String commandResponse = "";
 
     /**
      * Executes the command to display the list of tasks in the UI and updates the changes to storage.
