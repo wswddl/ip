@@ -12,6 +12,7 @@ public class MiloIce {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
+    private String commandType = "";
 
     /**
      * Constructor for the MiloIce application.
@@ -31,7 +32,7 @@ public class MiloIce {
         try {
             Command c = Parser.parse(input, tasks);
             c.execute(tasks, ui, storage);
-            //commandType = c.getClass().getSimpleName();
+            commandType = c.getClass().getSimpleName();
             return c.getCommandResponse();
         } catch (MiloIceException e) {
             System.out.println(e.getMessage()); // keep this for future debugging
@@ -40,6 +41,10 @@ public class MiloIce {
             System.out.println("Input must be a number (Eg. mark 1, unmark 1, delete 3)"); // keep this for future debugging
             return "Input must be a number (Eg. mark 1, unmark 1, delete 3)";
         }
+    }
+
+    public String getCommandType() {
+        return commandType;
     }
 
 }

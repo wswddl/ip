@@ -47,9 +47,10 @@ public class MainWindow extends AnchorPane {
             Main.closeApplication();
         }
         String response = miloIce.getResponse(input);
+        String commandType = miloIce.getCommandType();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage, commandType)
         );
         userInput.clear();
 
