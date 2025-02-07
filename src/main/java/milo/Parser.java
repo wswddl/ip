@@ -86,8 +86,8 @@ public class Parser {
             String description = input.substring(4).trim();
             if (description.isEmpty()) {
                 throw new MiloIceException("Invalid input: description of todo cannot be empty");
-            } // don't allow /by /from /to in To_do
-            else if (byIdx != -1 || fromIdx != -1 || toIdx != -1) {
+            } else if (byIdx != -1 || fromIdx != -1 || toIdx != -1) {
+                // don't allow /by /from /to in To_do
                 throw new MiloIceException("Invalid input: Todo should not contain '/by', '/from', '/to'");
             } else {
                 Todo todo = new Todo(description, false);

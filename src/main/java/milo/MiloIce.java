@@ -9,9 +9,9 @@ import milo.task.TaskList;
  * It interacts with the UI, storage, and task list.
  */
 public class MiloIce {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
 
     /**
      * Constructor for the MiloIce application.
