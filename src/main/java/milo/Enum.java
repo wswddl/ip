@@ -17,7 +17,8 @@ public enum Enum {
     EVENT,
     DELETE,
     FIND,
-    UNKNOWN;
+    UNKNOWN,
+    GREET;
 
     /**
      * Factory method for Command.
@@ -32,6 +33,8 @@ public enum Enum {
         try {
             if (parts[0].equals("bye") || parts[0].equals("list")) {
                 return Enum.valueOf(input.toUpperCase());
+            } else if (parts[0].equalsIgnoreCase("hi") || parts[0].equalsIgnoreCase("hello")) {
+                return Enum.GREET;
             } else {
                 return Enum.valueOf(parts[0].toUpperCase());
             }

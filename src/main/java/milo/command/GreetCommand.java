@@ -5,10 +5,10 @@ import milo.Ui;
 import milo.task.TaskList;
 
 /**
- * Represents a command to exit the application.
+ * Represents a command to greet the user.
  * This command triggers the UI to display a goodbye message.
  */
-public class ExitCommand extends Command {
+public class GreetCommand extends Command {
     private String commandResponse;
 
     /**
@@ -20,13 +20,13 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.sayGoodbye();
-        this.commandResponse = "Bye. Hope to see you again soon!";
+        ui.showWelcome();
+        this.commandResponse = "Hello! I'm Milo Ice\n" + "What can I do for you?";
     }
 
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
     @Override
     public String getCommandResponse() {

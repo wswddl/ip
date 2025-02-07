@@ -13,6 +13,7 @@ import milo.task.TaskList;
  */
 public class DeleteCommand extends Command {
     private final int deleteIndex;
+    private String commandResponse;
     public DeleteCommand(int deleteIndex) {
         this.deleteIndex = deleteIndex;
     }
@@ -29,10 +30,17 @@ public class DeleteCommand extends Command {
         Task removedTask = tasks.removeTask(deleteIndex - 1); ///// remember to change when using TaskList
         ui.deleteTaskUi(removedTask, tasks);
         storage.updateTask(tasks);
+
+        this.commandResponse = "Noted. I've removed this task:\n" + removedTask + "\n"
+                + "Now you have " + tasks.size() + " task(s) in the list";
     }
 
     @Override
     public boolean isExit() {
         return false;
+    }
+    @Override
+    public String getCommandResponse() {
+        return this.commandResponse;
     }
 }

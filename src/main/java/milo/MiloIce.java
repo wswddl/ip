@@ -12,6 +12,7 @@ public class MiloIce {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
+    private String commandType = "";
 
     /**
      * Constructor for the MiloIce application.
@@ -27,30 +28,24 @@ public class MiloIce {
         storage.loadTask(tasks);
     }
 
-    /**
-     * Starts the MiloIce application and enters the main application loop.
-     * This method continually prompts the user for input, parses the input into commands,
-     * executes the commands, and updates the UI and storage until the user exits the application.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand, tasks);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (MiloIceException e) {
-                ui.showError(e.getMessage());
-            } catch (NumberFormatException e) {
-                ui.showError("Input must be a number (Eg. mark 1, unmark 1, delete 3)");
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input, tasks);
+            c.execute(tasks, ui, storage);
+            commandType = c.getClass().getSimpleName();
+            return c.getCommandResponse();
+        } catch (MiloIceException e) {
+            System.out.println(e.getMessage()); // keep this for future debugging
+            return e.getMessage();
+        } catch (NumberFormatException e) {
+            System.out.println("Input must be a number (Eg. mark 1, unmark 1, delete 3)"); // keep this for future debugging
+            return "Input must be a number (Eg. mark 1, unmark 1, delete 3)";
         }
     }
 
-    public static void main(String[] args) {
-        new MiloIce("./src/main/java/data/savedTasks.txt").run();
+    public String getCommandType() {
+        return commandType;
     }
+
 }
 

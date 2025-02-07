@@ -90,7 +90,7 @@ public class Ui {
      */
     public void markTaskUi(Task markTask) {
         printStraightLine();
-        System.out.println("Nice! I've marked this task as done:");
+//        System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + markTask);
         printStraightLine();
     }
@@ -132,14 +132,14 @@ public class Ui {
      * Displays the tasks that match the specified keyword.
      * If no matching tasks are found, displays a message indicating so.
      *
-     * @param listOfTasks The list of tasks that contain the keyword.
+     * @param listOfTasksWithKeyword The list of tasks that contain the keyword.
      */
-    public void findKeywordUi(ArrayList<Task> listOfTasks) {
-        if (!listOfTasks.isEmpty()) {
+    public void findKeywordUi(ArrayList<Task> listOfTasksWithKeyword) {
+        if (!listOfTasksWithKeyword.isEmpty()) {
             printStraightLine();
             System.out.println("Here are the matching tasks in your list:");
             int idx = 1;
-            for (Task task : listOfTasks) {
+            for (Task task : listOfTasksWithKeyword) {
                 System.out.println(idx + "." + task);
                 idx++;
             }

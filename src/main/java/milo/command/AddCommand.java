@@ -14,6 +14,7 @@ import milo.task.TaskList;
 public class AddCommand extends Command {
 
     private final Task addedTask;
+    private String commandResponse;
     public AddCommand(Task addedTask) {
         this.addedTask = addedTask;
     }
@@ -31,10 +32,17 @@ public class AddCommand extends Command {
         tasks.addTask(this.addedTask);
         ui.addTaskUi(this.addedTask, tasks);
         storage.updateTask(tasks);
+
+        this.commandResponse = "Got it. I've added this task: \n" + addedTask + "\n"
+                + "Now you have " + tasks.size() + " task(s) in the list";
     }
 
     @Override
     public boolean isExit() {
         return false;
+    }
+    @Override
+    public String getCommandResponse() {
+        return this.commandResponse;
     }
 }
