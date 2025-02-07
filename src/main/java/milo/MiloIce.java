@@ -28,6 +28,12 @@ public class MiloIce {
         storage.loadTask(tasks);
     }
 
+    /**
+     * Given the user input, output the bot's response.
+     *
+     * @param input the user's input in the text field.
+     * @return the bot's response.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input, tasks);
