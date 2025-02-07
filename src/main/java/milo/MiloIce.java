@@ -49,6 +49,19 @@ public class MiloIce {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input, tasks);
+            c.execute(tasks, ui, storage);
+            //commandType = c.getClass().getSimpleName();
+            return c.getCommandResponse();
+        } catch (MiloIceException e) {
+            return e.getMessage();
+        } catch (NumberFormatException e) {
+            return "Input must be a number (Eg. mark 1, unmark 1, delete 3)";
+        }
+    }
+
     public static void main(String[] args) {
         new MiloIce("./src/main/java/data/savedTasks.txt").run();
     }

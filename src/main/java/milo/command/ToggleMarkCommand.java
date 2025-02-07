@@ -13,6 +13,7 @@ import milo.task.TaskList;
  */
 public class ToggleMarkCommand extends Command {
     private final int toggleMarkIndex;
+    private String commandResponse;
     private final Enum taskEnum;
 
     /**
@@ -41,9 +42,13 @@ public class ToggleMarkCommand extends Command {
         if (taskEnum == Enum.MARK) {
             Task markTask = tasks.getTask(toggleMarkIndex);
             ui.markTaskUi(markTask);
+            this.commandResponse = "Nice! I've marked this task as done:\n"
+                    + markTask;
         } else if (taskEnum == Enum.UNMARK) {
             Task unmarkTask = tasks.getTask(toggleMarkIndex);
             ui.unmarkTaskUi(unmarkTask);
+            this.commandResponse = "Nice! I've marked this task as done:\n"
+                    + unmarkTask;
         }
         storage.updateTask(tasks);
     }
@@ -51,5 +56,9 @@ public class ToggleMarkCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+    @Override
+    public String getCommandResponse() {
+        return this.commandResponse;
     }
 }

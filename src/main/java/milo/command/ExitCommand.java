@@ -9,6 +9,7 @@ import milo.task.TaskList;
  * This command triggers the UI to display a goodbye message.
  */
 public class ExitCommand extends Command {
+    private String commandResponse;
 
     /**
      * Executes the ExitCommand by triggering the UI to display a goodbye message.
@@ -20,10 +21,15 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.sayGoodbye();
+        this.commandResponse = "Bye. Hope to see you again soon!";
     }
 
     @Override
     public boolean isExit() {
         return true;
+    }
+    @Override
+    public String getCommandResponse() {
+        return this.commandResponse;
     }
 }

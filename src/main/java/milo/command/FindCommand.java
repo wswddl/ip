@@ -14,6 +14,7 @@ import milo.task.TaskList;
  */
 public class FindCommand extends Command {
     private final String keyword;
+    private String commandResponse;
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
@@ -28,12 +29,27 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ArrayList<Task> listOfTasks = tasks.findKeyword(keyword);
-        ui.findKeywordUi(listOfTasks);
+        ArrayList<Task> listOfTasksWithKeyword = tasks.findKeyword(keyword);
+        ui.findKeywordUi(listOfTasksWithKeyword);
+
+        if (!listOfTasksWithKeyword.isEmpty()) {
+            this.commandResponse = "Here are the matching tasks in your list:\n";
+            int idx = 1;
+            for (Task task : listOfTasksWithKeyword) {
+                this.commandResponse += idx + "." + task + "\n";
+                idx++;
+            }
+        } else {
+            this.commandResponse = "Sorry, there is no matching tasks in your list";
+        }
     }
     @Override
     public boolean isExit() {
         return false;
+    }
+    @Override
+    public String getCommandResponse() {
+        return this.commandResponse;
     }
 }
 
