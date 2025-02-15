@@ -29,6 +29,7 @@ public class ListCommand extends Command {
             this.commandResponse = "There is no task in the list";
         } else {
             for (Task task : tasks.getList()) {
+                // concat all the tasks in String format with next line
                 this.commandResponse += idx + "." + task + "\n";
                 idx++;
             }
