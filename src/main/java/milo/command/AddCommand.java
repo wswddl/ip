@@ -16,6 +16,7 @@ public class AddCommand extends Command {
     private final Task addedTask;
     private String commandResponse;
     public AddCommand(Task addedTask) {
+        assert addedTask != null : "added task cannot be null";
         this.addedTask = addedTask;
     }
 

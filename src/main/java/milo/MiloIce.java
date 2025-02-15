@@ -35,6 +35,7 @@ public class MiloIce {
      * @return the bot's response.
      */
     public String getResponse(String input) {
+        assert input != null : "Input cannot be null";
         try {
             Command c = Parser.parse(input, tasks);
             c.execute(tasks, ui, storage);

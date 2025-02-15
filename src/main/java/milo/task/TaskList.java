@@ -49,6 +49,7 @@ public class TaskList {
      * @return the removed task
      */
     public Task removeTask(int index) {
+        assert index >= 0 && index < listOfTask.size() : "index out of bound";
         return listOfTask.remove(index);
     }
 
@@ -60,6 +61,7 @@ public class TaskList {
      * @return the task at the specified index
      */
     public Task getTask(int index) {
+        assert index >= 0 && index < listOfTask.size() : "index out of bound";
         return listOfTask.get(index);
     }
 
@@ -73,6 +75,7 @@ public class TaskList {
      * @return An ArrayList containing all tasks whose descriptions contain the specified keyword.
      */
     public ArrayList<Task> findKeyword(String keyword) {
+        assert keyword != null : "find keyword cannot be null";
         ArrayList<Task> arr = new ArrayList<>();
         for (Task task : listOfTask) {
             String taskDescription = task.getDescription().toUpperCase();

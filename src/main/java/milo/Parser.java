@@ -38,6 +38,8 @@ public class Parser {
         String[] parts = input.split(" ");
         Enum inputEnum = Enum.of(input);
 
+        assert inputEnum != null;
+
         if (inputEnum == Enum.GREET) {
             return new GreetCommand();
         } else if (inputEnum == Enum.BYE) {
