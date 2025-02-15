@@ -23,6 +23,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, boolean isDone, LocalDateTime deadline) {
         super(description, isDone);
+        assert deadline != null : "Deadline cannot be null";
         this.deadline = deadline;
     }
 
@@ -37,6 +38,8 @@ public class Deadline extends Task {
      * @throws MiloIceException if the date format is invalid
      */
     public static Deadline of(String description, boolean isDone, String stringDeadline) throws MiloIceException {
+        assert description != null : "Description cannot be null";
+        assert stringDeadline != null : "Deadline input cannot be null";
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime deadline = LocalDateTime.parse(stringDeadline, formatter);

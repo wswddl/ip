@@ -25,6 +25,8 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, LocalDateTime start, LocalDateTime end) {
         super(description, isDone);
+        assert start != null : "Start time cannot be null";
+        assert end != null : "End time cannot be null";
         this.start = start;
         this.end = end;
     }
@@ -42,6 +44,9 @@ public class Event extends Task {
      */
     public static Event of(String description, boolean isDone,
                            String stringStart, String stringEnd) throws MiloIceException {
+        assert description != null : "Description cannot be null";
+        assert stringStart != null : "Start time input cannot be null";
+        assert stringEnd != null : "Start time input cannot be null";
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime start = LocalDateTime.parse(stringStart, formatter);

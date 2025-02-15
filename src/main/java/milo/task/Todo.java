@@ -28,6 +28,7 @@ public class Todo extends Task {
      * @throws MiloIceException If an error occurs during creation, such as invalid input.
      */
     public static Todo of(String description, boolean isDone) throws MiloIceException {
+        assert description != null : "Description cannot be null";
         return new Todo(description, isDone);
     }
 
