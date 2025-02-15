@@ -20,10 +20,6 @@ public class DeleteCommand extends Command {
     /**
      * Executes the DeleteCommand by removing the task from the task list,
      * updates the UI to show the task deletion, and updates the changes to the storage.
-     *
-     * @param tasks   The TaskList from which the task will be removed.
-     * @param ui      The UI instance to update with the task deletion.
-     * @param storage The storage instance to save the changes to the task list.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

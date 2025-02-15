@@ -32,10 +32,6 @@ public class ToggleMarkCommand extends Command {
      * Executes the command to mark or unmark a task based on the taskEnum value.
      * It retrieves the task from the TaskList by the toggleMarkIndex field, toggles its status
      * and updates the UI and the changes to storage.
-     *
-     * @param tasks   The TaskList containing all tasks.
-     * @param ui      The UI instance used to display the task's mark/unmark status.
-     * @param storage The storage instance used to persist the updated task list.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

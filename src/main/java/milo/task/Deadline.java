@@ -50,6 +50,26 @@ public class Deadline extends Task {
     }
 
     /**
+     *
+     * @param newDeadline
+     * @return
+     * @throws MiloIceException
+     */
+    public String changeDeadline(String newDeadline) throws MiloIceException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            deadline = LocalDateTime.parse(newDeadline, formatter);
+            return deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
+        } catch (DateTimeParseException e) {
+            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]");
+        }
+    }
+
+    public String getDeadline() {
+        return deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
+    }
+
+    /**
      * Returns the text format for saving to a text file storage.
      * The format is "D | <isDone> | <description> | <deadline>" where isDone is either 1 (done) or 0 (not done).
      *

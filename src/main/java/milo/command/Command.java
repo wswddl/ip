@@ -1,5 +1,6 @@
 package milo.command;
 
+import milo.MiloIceException;
 import milo.Storage;
 import milo.Ui;
 import milo.task.TaskList;
@@ -12,7 +13,14 @@ import milo.task.TaskList;
  * command triggers an exit action for the application.
  */
 public abstract class Command {
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+
+    /**
+     * @param tasks   The TaskList, not used in this command.
+     * @param ui      The UI instance to display the goodbye message.
+     * @param storage The storage instance, not used in this command.
+     * @throws MiloIceException
+     */
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws MiloIceException;
     public abstract boolean isExit();
     public abstract String getCommandResponse();
 }

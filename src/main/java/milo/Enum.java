@@ -18,7 +18,8 @@ public enum Enum {
     DELETE,
     FIND,
     UNKNOWN,
-    GREET;
+    GREET,
+    RESCHEDULE;
 
     /**
      * Factory method for Command.
@@ -29,14 +30,22 @@ public enum Enum {
      */
     public static Enum of(String input) {
         String[] parts = input.split(" ");
-
+        String firstWord = parts[0];
         try {
-            if (parts[0].equalsIgnoreCase("hi")
-                    || parts[0].equalsIgnoreCase("hello")
-                    || parts[0].equalsIgnoreCase("nihao")
-                    || parts[0].equalsIgnoreCase("helo")
-                    || parts[0].equalsIgnoreCase("wassup")) {
+            if (firstWord.equalsIgnoreCase("hi")
+                    || firstWord.equalsIgnoreCase("hello")
+                    || firstWord.equalsIgnoreCase("nihao")
+                    || firstWord.equalsIgnoreCase("helo")
+                    || firstWord.equalsIgnoreCase("wassup")
+                    || firstWord.equalsIgnoreCase("hei")
+                    || firstWord.equalsIgnoreCase("heii")) {
                 return Enum.GREET;
+            } else if (firstWord.equalsIgnoreCase("res")
+                    || firstWord.equalsIgnoreCase("reschedule")) {
+                return Enum.RESCHEDULE;
+            } else if (firstWord.equalsIgnoreCase("ls")
+                    || firstWord.equalsIgnoreCase("list")) {
+                return Enum.LIST;
             } else {
                 return Enum.valueOf(parts[0].toUpperCase());
             }

@@ -4,14 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import milo.command.AddCommand;
-import milo.command.Command;
-import milo.command.DeleteCommand;
-import milo.command.ExitCommand;
-import milo.command.FindCommand;
-import milo.command.GreetCommand;
-import milo.command.ListCommand;
-import milo.command.ToggleMarkCommand;
+import milo.command.*;
 import milo.task.Deadline;
 import milo.task.Event;
 import milo.task.Task;
@@ -70,18 +63,23 @@ public class Parser {
             String keyword = input.substring(4).trim();
             return new FindCommand(keyword);
 
+        } else if (inputEnum == Enum.RESCHEDULE) {
+            return handleRescheduleCommand(parts, tasks);
         } else {
             throw new MiloIceException("""
                     Sorry, I don't understand your request
                     Here's what I can do for you:
         
-                    1. list: view all tasks
+                    1. list/ls: view all tasks
                     2. bye: Exit chatbot
                     3. mark: mark the task with the given index (mark 2)
                     4. unmark: opposite of mark (unmark 3)
                     5. todo: add todo task (todo finish cs2103t)
                     6. deadline: add a task with a deadline (deadline cs2103t /by [yyyy-MM-dd])
-                    7. event: add a task with start & end time (event cs2103t /from [yyyy-MM-dd] /to [yyyy-MM-dd])""");
+                    7. event: add a task with start & end time (event cs2103t /from [yyyy-MM-dd] /to [yyyy-MM-dd])
+                    8. reschedule/res: change the deadline OR reschedule an Event, can't be used for Todo
+                                   Example: res 1 2031-01-01 0100 (1st task is a Deadline
+                                   Example: res 2 2031-01-01 0300 2031-01-01 0100 (2nd task is an Event)""");
         }
     }
 
@@ -175,7 +173,7 @@ public class Parser {
         if (byIdx == -1) {
             throw new MiloIceException(
                     "Please specify the deadline using '/by'\n"
-                            + "Example: deadline finish cs2103t project /by [yyyy-MM-dd]");
+                            + "Example: deadline finish cs2103t project /by [yyyy-MM-dd HHmm]");
         }
 
         String description = input.substring(8, byIdx).trim();
@@ -195,7 +193,7 @@ public class Parser {
         if (fromIdx == -1 || toIdx == -1) {
             throw new MiloIceException(
                     "Please specify the start date using '/from' and end date using '/to'\n"
-                            + "Example: event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
+                            + "Example: event [description] /from [yyyy-MM-dd HHmm] /to [yyyy-MM-dd HHmm]");
         }
 
         String description = input.substring(5, fromIdx).trim();
@@ -208,6 +206,49 @@ public class Parser {
         Event event = Event.of(description, false, start, end);
         return new AddCommand(event);
     }
+
+    private static Command handleRescheduleCommand(
+            String[] parts, TaskList tasks) throws MiloIceException {
+
+        int rescheduleIndex;
+        try {
+            rescheduleIndex = Integer.parseInt(parts[1]); // might throw NumberFormatException
+        } catch (NumberFormatException e) {
+            throw new MiloIceException("Input should be: res [index NUMBER] [new time]");
+        }
+        // index out of bound
+        if (rescheduleIndex < 1 || rescheduleIndex > tasks.size()) {
+            throw new MiloIceException("Invalid index: there are only " + tasks.size() + " task(s)");
+        }
+
+        Task task = tasks.getTask(rescheduleIndex - 1);
+        if (task instanceof Deadline && parts.length != 4) {
+            throw new MiloIceException(
+                    "Invalid input format: res [index] [new deadline]\n"
+                            + "Example: res 1 2027-01-01 0100 (if 1st task is a Deadline)");
+        } else if (task instanceof Deadline && parts.length == 4) {
+            Deadline dl = (Deadline) task;
+            String newStringDeadline = parts[2] + " " + parts[3];
+            return new ChangeDeadlineCommand(dl, newStringDeadline);
+
+
+        } else if (task instanceof Event && parts.length != 6) {
+            throw new MiloIceException(
+                    "Invalid input format: res [index] [new start] [new end]\n "
+                            + "Example: res 2 2027-01-01 0030 2027-01-01 0100 (if 2nd task is an Event)");
+        } else if (task instanceof Event && parts.length == 6) {
+            Event event = (Event) task;
+            String newStringStart = parts[2] + " " + parts[3];
+            String newStringEnd = parts[4] + " " + parts[5];
+            return new RescheduleEventCommand(event, newStringStart, newStringEnd);
+
+
+        } else {
+            // task is a todo object
+            throw new MiloIceException("Can only reschedule Deadline and Event, not Todo task");
+        }
+    }
+
 
     /**
      * Parses the given file, create the tasks and loads those tasks into the TaskList.

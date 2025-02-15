@@ -13,10 +13,6 @@ public class GreetCommand extends Command {
 
     /**
      * Executes the ExitCommand by triggering the UI to display a goodbye message.
-     *
-     * @param tasks   The TaskList, not used in this command.
-     * @param ui      The UI instance to display the goodbye message.
-     * @param storage The storage instance, not used in this command.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
