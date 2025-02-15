@@ -29,7 +29,7 @@ public class ListCommand extends Command {
             this.commandResponse = "There is no task in the list";
         } else {
             for (Task task : tasks.getList()) {
-                this.commandResponse += idx + "." + task + "\n";
+                this.commandResponse += idx + ". " + task + "\n";
                 idx++;
             }
         }

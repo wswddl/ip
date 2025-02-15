@@ -1,6 +1,7 @@
 package milo.command;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import milo.Storage;
 import milo.Ui;
@@ -34,11 +35,10 @@ public class FindCommand extends Command {
 
         if (!listOfTasksWithKeyword.isEmpty()) {
             this.commandResponse = "Here are the matching tasks in your list:\n";
-            int idx = 1;
-            for (Task task : listOfTasksWithKeyword) {
-                this.commandResponse += idx + "." + task + "\n";
-                idx++;
-            }
+            // Try to use stream for fun
+            this.commandResponse += Stream.iterate(1, i -> i <= listOfTasksWithKeyword.size(), i -> i + 1)
+                    .map(idx -> idx + ". " + listOfTasksWithKeyword.get(idx - 1) + "\n")
+                    .reduce("", (acc, s) -> acc + s);
         } else {
             this.commandResponse = "Sorry, there is no matching tasks in your list";
         }
