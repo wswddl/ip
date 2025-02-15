@@ -58,6 +58,34 @@ public class Event extends Task {
         }
     }
 
+
+    public String changeStartTime(String newStringStart) throws MiloIceException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            start = LocalDateTime.parse(newStringStart, formatter);
+            return start.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
+        } catch (DateTimeParseException e) {
+            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]");
+        }
+    }
+
+    public String changeEndTime(String newStringEnd) throws MiloIceException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            end = LocalDateTime.parse(newStringEnd, formatter);
+            return end.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
+        } catch (DateTimeParseException e) {
+            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]");
+        }
+    }
+
+    public String getStartTime() {
+        return start.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
+    }
+    public String getEndTime() {
+        return end.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
+    }
+
     /**
      * Returns the text format for saving to a text file storage.
      * The format is "D | <isDone> | <description> | <start> | <end>" where isDone is either 1 (done) or 0 (not done).
