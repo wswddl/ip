@@ -31,9 +31,11 @@ public enum Enum {
         String[] parts = input.split(" ");
 
         try {
-            if (parts[0].equals("bye") || parts[0].equals("list")) {
-                return Enum.valueOf(input.toUpperCase());
-            } else if (parts[0].equalsIgnoreCase("hi") || parts[0].equalsIgnoreCase("hello")) {
+            if (parts[0].equalsIgnoreCase("hi")
+                    || parts[0].equalsIgnoreCase("hello")
+                    || parts[0].equalsIgnoreCase("nihao")
+                    || parts[0].equalsIgnoreCase("helo")
+                    || parts[0].equalsIgnoreCase("wassup")) {
                 return Enum.GREET;
             } else {
                 return Enum.valueOf(parts[0].toUpperCase());

@@ -52,55 +52,11 @@ public class Storage {
      * @param tasks The TaskList to load tasks into.
      */
     public void loadTask(TaskList tasks) {
-        int numOfCorruptedFiles = 0;
-        try {
-            Scanner scanner = new Scanner(file);
-            while (file.exists() && scanner.hasNextLine()) {
-                String savedTextLine = scanner.nextLine();
-                String[] parts = savedTextLine.split(" \\| ");
-
-                if (parts[0].equals("T") && parts.length == 3) {
-                    boolean isDone = parts[1].equals("1");
-                    String description = parts[2];
-                    try {
-                        Task todo = Todo.of(description, isDone);
-                        tasks.addTask(todo);
-                    } catch (MiloIceException e) {
-                        numOfCorruptedFiles++;
-                    }
-                } else if (parts[0].equals("D") && parts.length == 4) {
-                    boolean isDone = parts[1].equals("1");
-                    String description = parts[2];
-                    String deadline = parts[3];
-                    try {
-                        Task dl = Deadline.of(description, isDone, deadline);
-                        tasks.addTask(dl);
-                    } catch (MiloIceException e) {
-                        numOfCorruptedFiles++;
-                    }
-                } else if (parts[0].equals("E") && parts.length == 5) {
-                    boolean isDone = parts[1].equals("1");
-                    String description = parts[2];
-                    String start = parts[3];
-                    String end = parts[4];
-                    try {
-                        Task event = Event.of(description, isDone, start, end);
-                        tasks.addTask(event);
-                    } catch (MiloIceException e) {
-                        numOfCorruptedFiles++;
-                    }
-
-                }
-                // ignore the corrupted task and move to the next one
-            }
-            if (numOfCorruptedFiles <= 1) {
-                System.out.println("There is " + numOfCorruptedFiles + " corrupted file");
-            } else {
-                System.out.println("There are " + numOfCorruptedFiles + " corrupted file(s)");
-            }
-            System.out.println();
-        } catch (FileNotFoundException e) {
-            System.out.println("Error creating file: " + e.getMessage());
+        int numOfCorruptedFiles = Parser.parseFileAndLoadTask(this.file, tasks);
+        if (numOfCorruptedFiles <= 1) {
+            System.out.println("There is " + numOfCorruptedFiles + " corrupted file");
+        } else {
+            System.out.println("There are " + numOfCorruptedFiles + " corrupted file(s)");
         }
     }
 

@@ -18,9 +18,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        final int minHeight = 220;
+        final int minWidth = 417;
         try {
-            stage.setMinHeight(220);
-            stage.setMinWidth(417);
+            stage.setMinHeight(minHeight);
+            stage.setMinWidth(minWidth);
 
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

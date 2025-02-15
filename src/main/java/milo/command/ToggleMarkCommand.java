@@ -39,11 +39,13 @@ public class ToggleMarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+
         if (taskEnum == Enum.MARK) {
             Task markTask = tasks.getTask(toggleMarkIndex - 1);
             ui.markTaskUi(markTask);
             this.commandResponse = "Nice! I've marked this task as done:\n"
                     + markTask;
+
         } else if (taskEnum == Enum.UNMARK) {
             Task unmarkTask = tasks.getTask(toggleMarkIndex - 1);
             ui.unmarkTaskUi(unmarkTask);
