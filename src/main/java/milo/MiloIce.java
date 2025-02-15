@@ -43,9 +43,6 @@ public class MiloIce {
         } catch (MiloIceException e) {
             System.out.println(e.getMessage()); // keep this for future debugging
             return e.getMessage();
-        } catch (NumberFormatException e) {
-            System.out.println("Input must be a number (Eg. mark 1, unmark 1, delete 3)"); // keep this for future debugging
-            return "Input must be a number (Eg. mark 1, unmark 1, delete 3)";
         }
     }
 

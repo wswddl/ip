@@ -43,6 +43,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
 
         String input = userInput.getText();
+        // close the app
         if (input.equalsIgnoreCase("bye")) {
             Main.closeApplication();
         }
