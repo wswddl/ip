@@ -79,32 +79,28 @@ public class Parser {
             throw new MiloIceException("""
                     Sorry mate, I don't understand your request
                     Here's are the command you can use \uD83C\uDF89:
-                    
                     Time format: [yyyy-MM-dd HHmm]
                     
                     1. list/ls: view all tasks
-                    
                     2. bye: Exit chatbot
-                    
                     3. mark: mark the task with the given index as done
                        Example: mark 2
-                       
                     4. unmark: mark the task with the given index as NOT done
                        Example: unmark 3
                        
                     5. todo: add a todo task
                        Example: todo touch grass
-                       
                     6. deadline: add a task with a deadline
                        Example: deadline feel relive /by 2031-01-01 0100
-                       
                     7. event: add a task with start & end time
                        Example: event unburden myself /from 2031-01-01 0030 /to 2031-01-01 0100
                        
-                    8. reschedule/res: change the deadline OR reschedule an Event, can't be used for Todo
+                    8. find: task with description that matches the given keyword (not case-sensitive)
+                       Example: find <keyword>
+                       
+                    9. reschedule/res: change the deadline OR reschedule an Event, can't be used for Todo
                                    Format: res 1 [new deadline] (1st task is a Deadline)
                                    Example: res 1 2031-01-01 0100
-                                   
                                    Format: res 2 [new start] [new end] (2nd task is an Event)
                                    Example: res 2 2031-01-01 0300 2031-01-01 0100""");
         }
@@ -244,6 +240,10 @@ public class Parser {
     private static Command handleRescheduleCommand(
             String[] parts, TaskList tasks) throws MiloIceException {
 
+        if (parts.length < 2) {
+            throw new MiloIceException("Input should be: res [index number] [new time]");
+        }
+
         int rescheduleIndex;
         try {
             rescheduleIndex = Integer.parseInt(parts[1]); // might throw NumberFormatException
@@ -258,11 +258,11 @@ public class Parser {
 
         Task task = tasks.getTask(rescheduleIndex - 1);
         if (task instanceof Deadline && parts.length != 4) {
-            throw new MiloIceException(
-                    """
-                            Invalid input format for rescheduling a deadline
-                            Correct format: res [index] [new deadline]
-                            Example: res 1 2027-01-01 0100 (1st task is a Deadline)""");
+            // give instruction that follows the index number the user provided :)
+            throw new MiloIceException("Invalid input format for rescheduling a deadline\n"
+                            + "Correct format: res [index] [new deadline]\n"
+                            + "Example: res " + rescheduleIndex + " 2027-01-01 0100 "
+                            + "(task " + rescheduleIndex + " is a Deadline)");
 
         } else if (task instanceof Deadline) {
             Deadline dl = (Deadline) task;
@@ -271,11 +271,11 @@ public class Parser {
 
 
         } else if (task instanceof Event && parts.length != 6) {
-            throw new MiloIceException(
-                    """
-                            Invalid input format for rescheduling an event:
-                            Correct format: res [index] [new start] [new end]
-                            Example: res 2 2031-01-01 0030 2031-01-01 0100 (2nd task is an Event)""");
+            // give instruction that follows the index number the user provided :)
+            throw new MiloIceException("Invalid input format for rescheduling an event:\n"
+                            + "Correct format: res [index] [new start] [new end]\n"
+                            + "Example: res " + rescheduleIndex + " 2031-01-01 0030 2031-01-01 0100 "
+                            + "(task " + rescheduleIndex + " is an Event)");
 
         } else if (task instanceof Event) {
             Event event = (Event) task;

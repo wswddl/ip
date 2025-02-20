@@ -47,7 +47,7 @@ public enum Enum {
                     || firstWord.equalsIgnoreCase("list")) {
                 return Enum.LIST;
             } else {
-                return Enum.valueOf(parts[0].toUpperCase());
+                return Enum.valueOf(firstWord.toUpperCase());
             }
         } catch (IllegalArgumentException e) {
             return UNKNOWN;

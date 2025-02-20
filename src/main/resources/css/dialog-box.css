@@ -1,9 +1,14 @@
 .label {
-    -fx-background-color: linear-gradient(to bottom right, #00ffbf, #00ddff);
-    -fx-border-color: #d55e00 #009e73 #cc79a7 #0072b2;
-    -fx-border-width: 2px;
-    -fx-background-radius: 1em 1em 0 1em;
-    -fx-border-radius: 1em 1em 0 1em;
+    -fx-background-color: linear-gradient(to bottom right, #131348, #434567);
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1px;
+    -fx-border-radius: 1.3em 1.3em 0 1.3em;
+    -fx-background-radius: 1.3em 1.3em 0 1.3em;
+    -fx-font-family: "Roboto", "Noto Sans", "Arial", sans-serif;
+        -fx-font-size: 16px;
+        -fx-font-color: #ffffff;
+        -fx-text-fill: white;
+    -fx-padding: 5px 11px 5px 11px;
     /*-fx-background-color: rgba(0, 0, 0, 0.5) /* Black with opacity of 0.5 */
 }
 
@@ -13,15 +18,23 @@
 }
 
 .add-label {
-    -fx-background-color: yellow;
+    -fx-background-color: linear-gradient(to bottom right, #404010, #505010);
 }
 
 .marked-label {
-    -fx-background-color: palegreen;
+    -fx-background-color: linear-gradient(to bottom right, #004635, #005423);
 }
 
 .delete-label {
-    -fx-background-color: lightpink;
+    -fx-background-color: linear-gradient(to bottom right, #3e1010, #67213c);
+}
+
+.greet-label {
+    -fx-background-color: linear-gradient(to bottom right, #1e5173, #1e696b);
+}
+
+.reschedule-label {
+    -fx-background-color: linear-gradient(to bottom right, #35355a, #745173);
 }
 
 #displayPicture {
@@ -29,8 +42,8 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 5, 5);
 
     /* Change size of image. */
-    -fx-scale-x: 1;
-    -fx-scale-y: 1;
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
 
     /* Rotate image clockwise by degrees. */
     -fx-rotate: 0;

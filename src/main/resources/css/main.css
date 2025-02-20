@@ -7,7 +7,8 @@
 
 .text-field {
     -fx-background-color: #d9ffe2;
-    -fx-font: 20px "Arial";
+    -fx-font: 18px "Monospaced";
+    -fx-font-weight: bold;
 }
 
 .button {
@@ -25,7 +26,10 @@
     -fx-font-size: 20px;
 }
 
-.scroll-pane,
+.scroll-pane {
+    -fx-background-color: rgba(0,0,0,.4);
+}
+
 .scroll-pane .viewport {
     -fx-background-color: transparent;
 }

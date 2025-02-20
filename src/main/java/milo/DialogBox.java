@@ -66,6 +66,14 @@ public class DialogBox extends HBox {
         case "DeleteCommand":
             dialog.getStyleClass().add("delete-label");
             break;
+        case "GreetCommand":
+            dialog.getStyleClass().add("greet-label");
+            break;
+        case "ChangeDeadlineCommand":
+            // Fallthrough
+        case "RescheduleEventCommand":
+            dialog.getStyleClass().add("reschedule-label");
+            break;
         default:
             // Do nothing
         }
