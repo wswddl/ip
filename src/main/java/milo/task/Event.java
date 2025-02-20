@@ -98,6 +98,7 @@ public class Event extends Task {
             // End time is the same as or before start time.
             throw new MiloIceException("Silly, end time cannot be the same as or before start time");
         }
+        // else do nothing
     }
 
     /**
