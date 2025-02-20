@@ -39,7 +39,8 @@ public class EventTest {
             Event.of(description, isDone, stringStart, stringEnd);
             fail(); // should throw MiloIceException
         } catch (MiloIceException e) {
-            assertEquals("Invalid time format: Should be [yyyy-MM-dd HHmm]", e.getMessage());
+            assertEquals("Invalid time format: Should be [yyyy-MM-dd HHmm]\n"
+                    + "Example: 2031-01-01 0100", e.getMessage());
         }
 
         try {
@@ -48,7 +49,8 @@ public class EventTest {
             Event.of(description, isDone, stringStart, stringEnd);
             fail(); // should throw MiloIceException
         } catch (MiloIceException e) {
-            assertEquals("Invalid time format: Should be [yyyy-MM-dd HHmm]", e.getMessage());
+            assertEquals("Invalid time format: Should be [yyyy-MM-dd HHmm]\n"
+                    + "Example: 2031-01-01 0100", e.getMessage());
         }
     }
 

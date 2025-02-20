@@ -27,7 +27,8 @@ public class DeleteCommand extends Command {
         ui.deleteTaskUi(removedTask, tasks);
         storage.updateTask(tasks);
 
-        this.commandResponse = "Noted. I've removed this task:\n" + removedTask + "\n"
+        this.commandResponse = "Okie, I've removed this task:\n"
+                + removedTask + "\n"
                 + "Now you have " + tasks.size() + " task(s) in the list";
     }
 

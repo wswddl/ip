@@ -22,12 +22,25 @@ public class ListCommand extends Command {
         storage.updateTask(tasks);
         int idx = 1;
         if (tasks.size() == 0) {
-            this.commandResponse = "There is no task in the list";
+            this.commandResponse = "There is no task in the list silly";
         } else {
+            String smilingEmoji = "\uD83D\uDE0A";
+            this.commandResponse = "Here are all the tasks you have " + smilingEmoji + "\n\n";
             for (Task task : tasks.getList()) {
                 // concat all the tasks in String format with next line
                 this.commandResponse += idx + "." + task + "\n";
                 idx++;
+            }
+
+            if (tasks.size() == 1) {
+                String happyEmoji = "\uD83D\uDE00";
+                this.commandResponse += "\nOne more to go!!! " + happyEmoji;
+            } else if (tasks.size() < 4) {
+                String happyEmoji = "\uD83D\uDE00";
+                this.commandResponse += "\nNice! you almost finish all your tasks " + happyEmoji;
+            } else {
+                String scaredEmoji = "\uD83D\uDE28";
+                this.commandResponse += "\nWow! that's quite a lot of tasks mate " + scaredEmoji;
             }
         }
     }

@@ -10,7 +10,7 @@ import milo.task.TaskList;
  */
 public class MiloIce {
     private final Storage storage;
-    private final TaskList tasks;
+        private final TaskList tasks;
     private final Ui ui;
     private String commandType = "";
 

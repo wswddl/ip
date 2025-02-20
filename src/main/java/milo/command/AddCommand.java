@@ -30,7 +30,7 @@ public class AddCommand extends Command {
         ui.addTaskUi(this.addedTask, tasks);
         storage.updateTask(tasks);
 
-        this.commandResponse = "Got it. I've added this task: \n" + addedTask + "\n"
+        this.commandResponse = "Okie boss. I've added this task:\n" + addedTask + "\n"
                 + "Now you have " + tasks.size() + " task(s) in the list";
     }
 

@@ -54,7 +54,8 @@ public class Event extends Task {
             return new Event(description, isDone, start, end);
 
         } catch (DateTimeParseException e) {
-            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]");
+            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]\n"
+                    + "Example: 2031-01-01 0100");
         }
     }
 
@@ -65,7 +66,8 @@ public class Event extends Task {
             start = LocalDateTime.parse(newStringStart, formatter);
             return start.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
         } catch (DateTimeParseException e) {
-            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]");
+            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]\n"
+                    + "Example: 2031-01-01 0100");
         }
     }
 
@@ -75,7 +77,8 @@ public class Event extends Task {
             end = LocalDateTime.parse(newStringEnd, formatter);
             return end.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
         } catch (DateTimeParseException e) {
-            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]");
+            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]\n"
+                    + "Example: 2031-01-01 0100");
         }
     }
 

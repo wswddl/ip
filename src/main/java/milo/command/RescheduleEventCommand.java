@@ -13,21 +13,21 @@ public class RescheduleEventCommand extends Command {
 
     private String commandResponse;
     private final Event event;
-    private final String newStartInUserFormat;
-    private final String newEndInUserFormat;
+    private final String newStartInUserInputFormat;
+    private final String newEndInUserInputFormat;
 
     /**
      * Constructs a RescheduleEventCommand object with the event to be rescheduled and the new start and end times.
      *
      * @param event The event to be rescheduled.
-     * @param newStartInUserFormat The new start time in user input format.
-     * @param newEndInUserFormat The new end time in user input format.
+     * @param newStartInUserInputFormat The new start time in user input format.
+     * @param newEndInUserInputFormat The new end time in user input format.
      */
     public RescheduleEventCommand(
-            Event event, String newStartInUserFormat, String newEndInUserFormat) {
+            Event event, String newStartInUserInputFormat, String newEndInUserInputFormat) {
         this.event = event;
-        this.newStartInUserFormat = newStartInUserFormat;
-        this.newEndInUserFormat = newEndInUserFormat;
+        this.newStartInUserInputFormat = newStartInUserInputFormat;
+        this.newEndInUserInputFormat = newEndInUserInputFormat;
     }
 
     /**
@@ -39,8 +39,8 @@ public class RescheduleEventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MiloIceException {
         String oldStartInChatFormat = event.getStartTime();
         String oldEndInChatFormat = event.getEndTime();
-        String newStartInChatFormat = event.changeStartTime(newStartInUserFormat);
-        String newEndInChatFormat = event.changeEndTime(newEndInUserFormat);
+        String newStartInChatFormat = event.changeStartTime(newStartInUserInputFormat);
+        String newEndInChatFormat = event.changeEndTime(newEndInUserInputFormat);
         this.commandResponse = "Nice! Ive changed the schedule \n"
                 + "Old: " + oldStartInChatFormat + " -- " + oldEndInChatFormat + "\n"
                 + "New: " + newStartInChatFormat + " -- " + newEndInChatFormat + "\n"

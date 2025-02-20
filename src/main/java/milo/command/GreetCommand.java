@@ -17,7 +17,8 @@ public class GreetCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showWelcome();
-        this.commandResponse = "Hello! I'm Milo Ice\n" + "What can I do for you?";
+        String smilingEmoji = "\uD83D\uDE0A";
+        this.commandResponse = "Hello! I'm Milo Ice\n" + "What can I do for you? " + smilingEmoji;
     }
 
     @Override

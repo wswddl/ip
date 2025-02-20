@@ -43,10 +43,6 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
 
         String input = userInput.getText();
-        // close the app
-        if (input.equalsIgnoreCase("bye")) {
-            Main.closeApplication();
-        }
         String response = miloIce.getResponse(input);
         String commandType = miloIce.getCommandType();
         dialogContainer.getChildren().addAll(
@@ -54,6 +50,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage, commandType)
         );
         userInput.clear();
+
+        // close the app
+        if (input.equalsIgnoreCase("bye")) {
+            Main.closeApplication();
+        }
 
     }
 }

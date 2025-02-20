@@ -17,7 +17,8 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.sayGoodbye();
-        this.commandResponse = "Bye. Hope to see you again soon!";
+        String smilingEmoji = "\uD83D\uDE0A";
+        this.commandResponse = "Bye. Hope to see you again soon! " + smilingEmoji;
     }
 
     @Override
