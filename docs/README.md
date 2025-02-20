@@ -13,7 +13,6 @@ Features provided are adding, marking, unmarking, deleting, and searching for ta
 With built-in storage, Milo Ice ensures that your tasks are saved and accessible even after you close the app.  
 
 ## Adding todo : `todo`
-
 - Add todo task which only consist of a description.
 - The task will be added to the task list with a tag `T`.
 
