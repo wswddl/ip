@@ -59,6 +59,17 @@ public class Event extends Task {
                     + "Example: 2031-01-01 0100");
         }
     }
+
+    /**
+     * Updates the start and end time of the event.
+     * Validates the new time range and returns the updated start and end times in a user-friendly format.
+     *
+     * @param newStringStart The new start time as a string in "yyyy-MM-dd HHmm" format.
+     * @param newStringEnd The new end time as a string in "yyyy-MM-dd HHmm" format.
+     * @return A string array containing the formatted start and end times in "MMM dd yyyy hh:mm a" format.
+     * @throws MiloIceException If the new time format is invalid or if the end time is
+     *                          before or equal to the start time.
+     */
     public String[] changeStartAndEndTime(String newStringStart, String newStringEnd) throws MiloIceException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");

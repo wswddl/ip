@@ -13,7 +13,10 @@ public class ListCommand extends Command {
     private String commandResponse = "";
 
     /**
-     * Executes the command to display the list of tasks in the UI and updates the changes to storage.
+     * Executes the command to list all tasks in the task list.
+     *
+     * @param tasks   The task list containing the tasks.
+     * @param storage The storage system to update the tasks.
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {

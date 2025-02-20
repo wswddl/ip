@@ -26,9 +26,12 @@ public class ChangeDeadlineCommand extends Command {
     }
 
     /**
-     * Executes the command to change the deadline and provide a response.
+     * Executes the command by updating the deadline of the specified task
+     * and saving the changes to storage.
      *
-     * @throws MiloIceException If there is an error while updating the event.
+     * @param tasks   The task list containing the deadline task.
+     * @param storage The storage system to persist changes.
+     * @throws MiloIceException If the deadline update fails.
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws MiloIceException {

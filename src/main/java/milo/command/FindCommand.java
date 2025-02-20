@@ -20,8 +20,10 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the find command by searching for tasks that contain the specified keyword
-     * in their description, and then displays the matching tasks in UI.
+     * Searches for tasks containing the keyword and updates the response message.
+     *
+     * @param tasks   The task list to search.
+     * @param storage The storage system (not modified).
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {

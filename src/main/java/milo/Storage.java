@@ -2,16 +2,11 @@ package milo;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
-import milo.task.Deadline;
-import milo.task.Event;
 import milo.task.Task;
 import milo.task.TaskList;
-import milo.task.Todo;
 
 /**
  * Handles loading and saving tasks to a file. It ensures that the file structure

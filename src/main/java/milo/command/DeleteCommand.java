@@ -16,9 +16,13 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int deleteIndex) {
         this.deleteIndex = deleteIndex;
     }
+
     /**
-     * Executes the DeleteCommand by removing the task from the task list,
-     * updates the UI to show the task deletion, and updates the changes to the storage.
+     * Executes the command by removing the task at the specified index
+     * and save the changes to storage.
+     *
+     * @param tasks   The task list from which the task is to be removed.
+     * @param storage The storage system to persist changes.
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {

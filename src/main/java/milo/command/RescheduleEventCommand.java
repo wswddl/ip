@@ -32,6 +32,8 @@ public class RescheduleEventCommand extends Command {
     /**
      * Executes the command to reschedule the event by changing its start and end times and provide a response.
      *
+     * @param tasks   The task list containing the tasks.
+     * @param storage The storage system to update the tasks.
      * @throws MiloIceException If there is an error while updating the event.
      */
     @Override
