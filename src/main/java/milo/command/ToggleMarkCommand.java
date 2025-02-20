@@ -39,13 +39,15 @@ public class ToggleMarkCommand extends Command {
         if (taskEnum == Enum.MARK) {
             Task markTask = tasks.getTask(toggleMarkIndex - 1);
             ui.markTaskUi(markTask);
-            this.commandResponse = "Nice! I've marked this task as done:\n"
+            String smilingEmoji = "\uD83D\uDE0A";
+            this.commandResponse = "Nice! I've marked this task as done:" + smilingEmoji + "\n"
                     + markTask;
 
         } else if (taskEnum == Enum.UNMARK) {
             Task unmarkTask = tasks.getTask(toggleMarkIndex - 1);
             ui.unmarkTaskUi(unmarkTask);
-            this.commandResponse = "Nice! I've marked this task as done:\n"
+            String smilingEmoji = "\uD83D\uDE0A";
+            this.commandResponse = "Nice! I've marked this task as done:" + smilingEmoji + "\n"
                     + unmarkTask;
         }
         storage.updateTask(tasks);

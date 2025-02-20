@@ -45,14 +45,16 @@ public class Deadline extends Task {
             LocalDateTime deadline = LocalDateTime.parse(stringDeadline, formatter);
             return new Deadline(description, isDone, deadline);
         } catch (DateTimeParseException e) {
-            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]");
+            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]\n" +
+                    "Example: 2031-01-01 0100");
         }
     }
 
     /**
+     * Change the deadline to a new one
      *
-     * @param newDeadline
-     * @return
+     * @param newDeadline the String that specify the new deadline
+     * @return the old deadline in chat format String
      * @throws MiloIceException
      */
     public String changeDeadline(String newDeadline) throws MiloIceException {
@@ -61,7 +63,8 @@ public class Deadline extends Task {
             deadline = LocalDateTime.parse(newDeadline, formatter);
             return deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
         } catch (DateTimeParseException e) {
-            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]");
+            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]\n"
+                    + "Example: 2031-01-01 0100");
         }
     }
 

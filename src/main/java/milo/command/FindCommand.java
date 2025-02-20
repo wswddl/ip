@@ -30,13 +30,13 @@ public class FindCommand extends Command {
         ui.findKeywordUi(listOfTasksWithKeyword);
 
         if (!listOfTasksWithKeyword.isEmpty()) {
-            this.commandResponse = "Here are the matching tasks in your list:\n";
+            this.commandResponse = "Here are the matching tasks in your list mate:\n";
             // Try to use stream for fun
             this.commandResponse += Stream.iterate(1, i -> i <= listOfTasksWithKeyword.size(), i -> i + 1)
                     .map(idx -> idx + ". " + listOfTasksWithKeyword.get(idx - 1) + "\n")
                     .reduce("", (acc, s) -> acc + s);
         } else {
-            this.commandResponse = "Sorry, there is no matching tasks in your list";
+            this.commandResponse = "Sorry mate, there is no matching tasks in your list";
         }
     }
     @Override

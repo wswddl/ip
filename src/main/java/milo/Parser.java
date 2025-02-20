@@ -4,7 +4,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import milo.command.*;
+import milo.command.AddCommand;
+import milo.command.ChangeDeadlineCommand;
+import milo.command.Command;
+import milo.command.DeleteCommand;
+import milo.command.ExitCommand;
+import milo.command.FindCommand;
+import milo.command.GreetCommand;
+import milo.command.ListCommand;
+import milo.command.RescheduleEventCommand;
+import milo.command.ToggleMarkCommand;
 import milo.task.Deadline;
 import milo.task.Event;
 import milo.task.Task;
@@ -27,6 +36,7 @@ public class Parser {
      * @return The appropriate Command based on the input.
      * @throws MiloIceException If the input is invalid or cannot be processed.
      */
+    @SuppressWarnings("checkstyle:Regexp")
     public static Command parse(String input, TaskList tasks) throws MiloIceException {
         String[] parts = input.split(" ");
         Enum inputEnum = Enum.of(input);
@@ -67,36 +77,54 @@ public class Parser {
             return handleRescheduleCommand(parts, tasks);
         } else {
             throw new MiloIceException("""
-                    Sorry, I don't understand your request
-                    Here's what I can do for you:
-        
+                    Sorry mate, I don't understand your request
+                    Here's are the command you can use \uD83C\uDF89:
+                    
+                    Time format: [yyyy-MM-dd HHmm]
+                    
                     1. list/ls: view all tasks
+                    
                     2. bye: Exit chatbot
-                    3. mark: mark the task with the given index (mark 2)
-                    4. unmark: opposite of mark (unmark 3)
-                    5. todo: add todo task (todo finish cs2103t)
-                    6. deadline: add a task with a deadline (deadline cs2103t /by [yyyy-MM-dd])
-                    7. event: add a task with start & end time (event cs2103t /from [yyyy-MM-dd] /to [yyyy-MM-dd])
+                    
+                    3. mark: mark the task with the given index as done
+                       Example: mark 2
+                       
+                    4. unmark: mark the task with the given index as NOT done
+                       Example: unmark 3
+                       
+                    5. todo: add a todo task
+                       Example: todo touch grass
+                       
+                    6. deadline: add a task with a deadline
+                       Example: deadline feel relive /by 2031-01-01 0100
+                       
+                    7. event: add a task with start & end time
+                       Example: event unburden myself /from 2031-01-01 0030 /to 2031-01-01 0100
+                       
                     8. reschedule/res: change the deadline OR reschedule an Event, can't be used for Todo
-                                   Example: res 1 2031-01-01 0100 (1st task is a Deadline
-                                   Example: res 2 2031-01-01 0300 2031-01-01 0100 (2nd task is an Event)""");
+                                   Format: res 1 [new deadline] (1st task is a Deadline)
+                                   Example: res 1 2031-01-01 0100
+                                   
+                                   Format: res 2 [new start] [new end] (2nd task is an Event)
+                                   Example: res 2 2031-01-01 0300 2031-01-01 0100""");
         }
     }
 
     private static DeleteCommand handleDeleteInput(String[] parts, TaskList tasks) throws MiloIceException {
         if (parts.length != 2) {
-            throw new MiloIceException("Invalid input, correct example: delete 1");
+            throw new MiloIceException("Mate that's a wrong input, correct example: delete 1");
         }
 
         int deleteIndex;
         try {
             deleteIndex = Integer.parseInt(parts[1]); // might throw NumberFormatException
         } catch (NumberFormatException e) {
-            throw new MiloIceException("Input must be a number (Eg. mark 1, unmark 1, delete 3)");
+            throw new MiloIceException("Mate, the input must be a number (Eg. mark 1, unmark 1, delete 3)");
         }
 
         if (deleteIndex < 1 || deleteIndex > tasks.size()) {
-            throw new MiloIceException("Invalid index: there are only " + tasks.size() + " task(s)");
+            String laughEmoji = "\uD83D\uDE02";
+            throw new MiloIceException("Invalid index mate: there are only " + tasks.size() + " task(s) " + laughEmoji);
         }
 
         return new DeleteCommand(deleteIndex);
@@ -104,7 +132,7 @@ public class Parser {
 
     private static ToggleMarkCommand handleMarkCommand(String[] parts, TaskList tasks) throws MiloIceException {
         if (parts.length != 2) {
-            throw new MiloIceException("Invalid input, correct example: mark 1");
+            throw new MiloIceException("Invalid input mate: correct example \"mark 1\"");
         }
 
         int markIndex;
@@ -115,12 +143,13 @@ public class Parser {
         }
 
         if (markIndex < 1 || markIndex > tasks.size()) {
-            throw new MiloIceException("Invalid index: there are only " + tasks.size() + " task(s)");
+            String laughEmoji = "\uD83D\uDE02";
+            throw new MiloIceException("Invalid index: there are only " + tasks.size() + " task(s) " + laughEmoji);
         }
 
         Task task = tasks.getTask(markIndex - 1);
         if (!task.markAsDone()) {
-            throw new MiloIceException("Task has already been marked before");
+            throw new MiloIceException("This task has already been marked before");
         }
 
         return new ToggleMarkCommand(Enum.MARK, markIndex);
@@ -128,7 +157,7 @@ public class Parser {
 
     private static ToggleMarkCommand handleUnmarkCommand(String[] parts, TaskList tasks) throws MiloIceException {
         if (parts.length != 2) {
-            throw new MiloIceException("Invalid input, correct example: unmark 1");
+            throw new MiloIceException("Invalid input mate: correct example \"mark 1\"");
         }
 
         int unmarkIndex;
@@ -139,12 +168,13 @@ public class Parser {
         }
 
         if (unmarkIndex < 1 || unmarkIndex > tasks.size()) {
-            throw new MiloIceException("Invalid index: there are only " + tasks.size() + " task(s)");
+            String laughEmoji = "\uD83D\uDE02";
+            throw new MiloIceException("Invalid index: there are only " + tasks.size() + " task(s) " + laughEmoji);
         }
 
         Task task = tasks.getTask(unmarkIndex - 1);
         if (!task.unmarkAsDone()) {
-            throw new MiloIceException("Task isn't marked yet");
+            throw new MiloIceException("This task isn't marked yet");
         }
 
         return new ToggleMarkCommand(Enum.UNMARK, unmarkIndex);
@@ -157,10 +187,12 @@ public class Parser {
         String description = input.substring(4).trim();
 
         if (description.isEmpty()) {
-            throw new MiloIceException("Invalid input: description of todo cannot be empty");
+            String sadEmoji = "\uD83D\uDE22";
+            throw new MiloIceException("Invalid input mate: description of todo cannot be empty" + sadEmoji);
         } else if (byIdx != -1 || fromIdx != -1 || toIdx != -1) {
             // don't allow /by /from /to in To_do
-            throw new MiloIceException("Invalid input: Todo should not contain '/by', '/from', '/to'");
+            String sadEmoji = "\uD83D\uDE22";
+            throw new MiloIceException("Invalid input mate: Todo should not contain '/by', '/from', '/to'" + sadEmoji);
         }
         // happy path
         Todo todo = new Todo(description, false);
@@ -179,7 +211,8 @@ public class Parser {
         String description = input.substring(8, byIdx).trim();
         String deadline = input.substring(byIdx + 4).trim();
         if (description.isEmpty() || deadline.isEmpty()) {
-            throw new MiloIceException("Invalid input: description and deadline cannot be empty");
+            String sadEmoji = "\uD83D\uDE22";
+            throw new MiloIceException("Invalid input: description and deadline cannot be empty" + sadEmoji);
         }
         // happy path
         Deadline dl = Deadline.of(description, false, deadline);
@@ -200,7 +233,8 @@ public class Parser {
         String start = input.substring(fromIdx + 6, toIdx).trim();
         String end = input.substring(toIdx + 4).trim();
         if (description.isEmpty() || start.isEmpty() || end.isEmpty()) {
-            throw new MiloIceException("Invalid input: description, start and end cannot be empty");
+            String sadEmoji = "\uD83D\uDE22";
+            throw new MiloIceException("Invalid input: description, start and end cannot be empty" + sadEmoji);
         }
         // happy path
         Event event = Event.of(description, false, start, end);
@@ -218,15 +252,19 @@ public class Parser {
         }
         // index out of bound
         if (rescheduleIndex < 1 || rescheduleIndex > tasks.size()) {
-            throw new MiloIceException("Invalid index: there are only " + tasks.size() + " task(s)");
+            String laughEmoji = "\uD83D\uDE02";
+            throw new MiloIceException("Invalid index: there are only " + tasks.size() + " task(s) "+ laughEmoji);
         }
 
         Task task = tasks.getTask(rescheduleIndex - 1);
         if (task instanceof Deadline && parts.length != 4) {
             throw new MiloIceException(
-                    "Invalid input format: res [index] [new deadline]\n"
-                            + "Example: res 1 2027-01-01 0100 (if 1st task is a Deadline)");
-        } else if (task instanceof Deadline && parts.length == 4) {
+                    """
+                            Invalid input format for rescheduling a deadline
+                            Correct format: res [index] [new deadline]
+                            Example: res 1 2027-01-01 0100 (1st task is a Deadline)""");
+
+        } else if (task instanceof Deadline) {
             Deadline dl = (Deadline) task;
             String newStringDeadline = parts[2] + " " + parts[3];
             return new ChangeDeadlineCommand(dl, newStringDeadline);
@@ -234,9 +272,12 @@ public class Parser {
 
         } else if (task instanceof Event && parts.length != 6) {
             throw new MiloIceException(
-                    "Invalid input format: res [index] [new start] [new end]\n "
-                            + "Example: res 2 2027-01-01 0030 2027-01-01 0100 (if 2nd task is an Event)");
-        } else if (task instanceof Event && parts.length == 6) {
+                    """
+                            Invalid input format for rescheduling an event:
+                            Correct format: res [index] [new start] [new end]
+                            Example: res 2 2031-01-01 0030 2031-01-01 0100 (2nd task is an Event)""");
+
+        } else if (task instanceof Event) {
             Event event = (Event) task;
             String newStringStart = parts[2] + " " + parts[3];
             String newStringEnd = parts[4] + " " + parts[5];

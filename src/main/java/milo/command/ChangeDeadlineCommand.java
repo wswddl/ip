@@ -13,17 +13,17 @@ public class ChangeDeadlineCommand extends Command {
 
     private String commandResponse;
     private final Deadline dl;
-    private final String newDeadlineInUserFormat;
+    private final String newDeadlineInUserInputFormat;
 
     /**
      * Constructs a ChangeDeadlineCommand object with the deadline to be changed and the new deadline.
      *
      * @param dl The deadline to be changed.
-     * @param newDeadlineInUserFormat The new deadline in user input format.
+     * @param newDeadlineInUserInputFormat The new deadline in user input format.
      */
-    public ChangeDeadlineCommand(Deadline dl, String newDeadlineInUserFormat) {
+    public ChangeDeadlineCommand(Deadline dl, String newDeadlineInUserInputFormat) {
         this.dl = dl;
-        this.newDeadlineInUserFormat = newDeadlineInUserFormat;
+        this.newDeadlineInUserInputFormat = newDeadlineInUserInputFormat;
     }
 
     /**
@@ -34,8 +34,11 @@ public class ChangeDeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MiloIceException {
         String oldDeadlineInChatFormat = dl.getDeadline();
-        String newDeadlineInChatFormat = dl.changeDeadline(newDeadlineInUserFormat);
-        this.commandResponse = "Nice! Ive changed the deadline from " + oldDeadlineInChatFormat + " to "
+        String newDeadlineInChatFormat = dl.changeDeadline(newDeadlineInUserInputFormat);
+        this.commandResponse = "Okie! Ive changed the deadline\n"
+                + "              from\n"
+                + oldDeadlineInChatFormat + "\n"
+                + "                to\n"
                 + newDeadlineInChatFormat + "\n"
                 + dl;
         storage.updateTask(tasks);
