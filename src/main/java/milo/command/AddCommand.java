@@ -1,7 +1,6 @@
 package milo.command;
 
 import milo.Storage;
-import milo.Ui;
 import milo.task.Task;
 import milo.task.TaskList;
 
@@ -25,9 +24,8 @@ public class AddCommand extends Command {
      * and the changes to storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         tasks.addTask(this.addedTask);
-        ui.addTaskUi(this.addedTask, tasks);
         storage.updateTask(tasks);
 
         this.commandResponse = "Okie boss. I've added this task:\n" + addedTask + "\n"

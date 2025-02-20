@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import milo.Storage;
-import milo.Ui;
 import milo.task.Task;
 import milo.task.TaskList;
 
@@ -25,9 +24,8 @@ public class FindCommand extends Command {
      * in their description, and then displays the matching tasks in UI.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         ArrayList<Task> listOfTasksWithKeyword = tasks.findKeyword(keyword);
-        ui.findKeywordUi(listOfTasksWithKeyword);
 
         if (!listOfTasksWithKeyword.isEmpty()) {
             this.commandResponse = "Here are the matching tasks in your list mate:\n";

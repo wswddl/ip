@@ -1,7 +1,6 @@
 package milo.command;
 
 import milo.Storage;
-import milo.Ui;
 import milo.task.TaskList;
 
 /**
@@ -15,8 +14,7 @@ public class GreetCommand extends Command {
      * Executes the ExitCommand by triggering the UI to display a goodbye message.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showWelcome();
+    public void execute(TaskList tasks, Storage storage) {
         String smilingEmoji = "\uD83D\uDE0A";
         this.commandResponse = "Hello! I'm Milo Ice\n" + "What can I do for you? " + smilingEmoji;
     }

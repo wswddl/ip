@@ -2,7 +2,6 @@ package milo.command;
 
 import milo.MiloIceException;
 import milo.Storage;
-import milo.Ui;
 import milo.task.Deadline;
 import milo.task.TaskList;
 
@@ -32,7 +31,7 @@ public class ChangeDeadlineCommand extends Command {
      * @throws MiloIceException If there is an error while updating the event.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MiloIceException {
+    public void execute(TaskList tasks, Storage storage) throws MiloIceException {
         String oldDeadlineInChatFormat = dl.getDeadline();
         String newDeadlineInChatFormat = dl.changeDeadline(newDeadlineInUserInputFormat);
         this.commandResponse = "Okie! Ive changed the deadline\n"

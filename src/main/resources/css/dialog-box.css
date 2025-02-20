@@ -9,7 +9,6 @@
         -fx-font-color: #ffffff;
         -fx-text-fill: white;
     -fx-padding: 5px 11px 5px 11px;
-    /*-fx-background-color: rgba(0, 0, 0, 0.5) /* Black with opacity of 0.5 */
 }
 
 .reply-label {

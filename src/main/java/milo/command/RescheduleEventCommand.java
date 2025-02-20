@@ -2,7 +2,6 @@ package milo.command;
 
 import milo.MiloIceException;
 import milo.Storage;
-import milo.Ui;
 import milo.task.Event;
 import milo.task.TaskList;
 
@@ -36,7 +35,7 @@ public class RescheduleEventCommand extends Command {
      * @throws MiloIceException If there is an error while updating the event.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MiloIceException {
+    public void execute(TaskList tasks, Storage storage) throws MiloIceException {
         String oldStartInChatFormat = event.getStartTime();
         String oldEndInChatFormat = event.getEndTime();
         String[] newStartAndEndInChatFormat = event.changeStartAndEndTime(

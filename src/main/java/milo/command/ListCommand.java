@@ -1,7 +1,6 @@
 package milo.command;
 
 import milo.Storage;
-import milo.Ui;
 import milo.task.Task;
 import milo.task.TaskList;
 
@@ -17,8 +16,7 @@ public class ListCommand extends Command {
      * Executes the command to display the list of tasks in the UI and updates the changes to storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.listTasksUi(tasks);
+    public void execute(TaskList tasks, Storage storage) {
         storage.updateTask(tasks);
         int idx = 1;
         if (tasks.size() == 0) {

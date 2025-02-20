@@ -2,7 +2,6 @@ package milo.command;
 
 import milo.Enum;
 import milo.Storage;
-import milo.Ui;
 import milo.task.Task;
 import milo.task.TaskList;
 
@@ -34,18 +33,16 @@ public class ToggleMarkCommand extends Command {
      * and updates the UI and the changes to storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
 
         if (taskEnum == Enum.MARK) {
             Task markTask = tasks.getTask(toggleMarkIndex - 1);
-            ui.markTaskUi(markTask);
             String smilingEmoji = "\uD83D\uDE0A";
             this.commandResponse = "Nice! I've marked this task as done: " + smilingEmoji + "\n"
                     + markTask;
 
         } else if (taskEnum == Enum.UNMARK) {
             Task unmarkTask = tasks.getTask(toggleMarkIndex - 1);
-            ui.unmarkTaskUi(unmarkTask);
             String smilingEmoji = "\uD83D\uDE0A";
             this.commandResponse = "Nice! I've marked this task as done: " + smilingEmoji + "\n"
                     + unmarkTask;

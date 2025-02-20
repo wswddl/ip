@@ -10,8 +10,7 @@ import milo.task.TaskList;
  */
 public class MiloIce {
     private final Storage storage;
-        private final TaskList tasks;
-    private final Ui ui;
+    private final TaskList tasks;
     private String commandType = "";
 
     /**
@@ -22,7 +21,6 @@ public class MiloIce {
      * @param filePath the path to the file where tasks are saved
      */
     public MiloIce(String filePath) {
-        this.ui = new Ui();
         this.storage = new Storage(filePath);
         tasks = new TaskList();
         storage.loadTask(tasks);
@@ -38,11 +36,10 @@ public class MiloIce {
         assert input != null : "Input cannot be null";
         try {
             Command c = Parser.parse(input, tasks);
-            c.execute(tasks, ui, storage);
+            c.execute(tasks, storage);
             commandType = c.getClass().getSimpleName();
             return c.getCommandResponse();
         } catch (MiloIceException e) {
-            System.out.println(e.getMessage()); // keep this for future debugging
             return e.getMessage();
         }
     }
