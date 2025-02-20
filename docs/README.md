@@ -1,7 +1,7 @@
 # Milo Ice User Guide
 
 ## Sample GUI Screenshots
-**Here are some example screenshots of Milo Ice:** <br>
+**Here are some screenshots of Milo Ice:** <br>
 <img src="Ui.png" alt="Milo Ice Screenshot 1" width="600"/> <br>
 <img src="Ui2.png" alt="Milo Ice Screenshot 2" width="600"/>
 
@@ -24,7 +24,7 @@ Example:
 `todo be happy`
 
 Outcome:
-`be happy` task is added to the task list with a tag `T`
+`be happy` Todo task is added to the task list with a tag `T`
 and by default it is not marked as done.
 
 ```
@@ -43,7 +43,7 @@ Example:
 `deadline Write user guide /by 2025-02-21 2359`
 
 Outcome:
-`Write user guide` task is added to the task list with a tag `D`
+`Write user guide` Deadline task is added to the task list with a tag `D`
 and by default it is not marked as done.
 
 ```
@@ -63,7 +63,7 @@ Example:
 `event party /from 2025-02-22 1600 /to 2025-02-22 2200`
 
 Outcome:
-`party` task is added to the task list with a tag `E`
+`party` Event task is added to the task list with a tag `E`
 and by default it is not marked as done.
 
 ```
@@ -94,7 +94,7 @@ Format:
 Example:
 `mark 1`
 
-Outcome:
+Outcome: The 1<sup>st</sup> task in the task list is marked as done.
 ```
 Nice! I've marked this task as done:
 [T][X] be happy
@@ -130,7 +130,7 @@ Format:
 Example:
 `find book`
 
-Outcome:
+Outcome: list out all the tasks that match the keyword.
 ```
 Here are the matching tasks in your list:
 1. [T][ ] book hotel
@@ -146,4 +146,4 @@ Here are the matching tasks in your list:
 2. Exit the app : `bye`
 
 ## Note
-- Don't worry if you forget the format, the Milo Ice will show you the correct format :)
+- Don't worry if you forget the format, Milo Ice will show you the correct format :)
