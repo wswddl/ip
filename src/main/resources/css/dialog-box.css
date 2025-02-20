@@ -5,9 +5,10 @@
     -fx-border-radius: 1.3em 1.3em 0 1.3em;
     -fx-background-radius: 1.3em 1.3em 0 1.3em;
     -fx-font-family: "Roboto", "Noto Sans", "Arial", sans-serif;
-        -fx-font-size: 16px;
-        -fx-font-color: #ffffff;
-        -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-color: #ffffff;
+    -fx-text-fill: white;
+
     -fx-padding: 5px 11px 5px 11px;
 }
 
