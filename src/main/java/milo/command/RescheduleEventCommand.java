@@ -39,8 +39,10 @@ public class RescheduleEventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MiloIceException {
         String oldStartInChatFormat = event.getStartTime();
         String oldEndInChatFormat = event.getEndTime();
-        String newStartInChatFormat = event.changeStartTime(newStartInUserInputFormat);
-        String newEndInChatFormat = event.changeEndTime(newEndInUserInputFormat);
+        String[] newStartAndEndInChatFormat = event.changeStartAndEndTime(
+                newStartInUserInputFormat, newEndInUserInputFormat);
+        String newStartInChatFormat = newStartAndEndInChatFormat[0];
+        String newEndInChatFormat = newStartAndEndInChatFormat[1];
         this.commandResponse = "Nice! Ive changed the schedule \n"
                 + "Old: " + oldStartInChatFormat + " -- " + oldEndInChatFormat + "\n"
                 + "New: " + newStartInChatFormat + " -- " + newEndInChatFormat + "\n"
