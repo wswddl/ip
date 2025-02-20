@@ -24,8 +24,7 @@ public enum Enum {
     /**
      * Factory method for Command.
      *
-     * @return Command.BYE, Command.LIST only if the input is exactly "bye", "list".
-     *         return the corresponding Command enum if the first word of the input matches the enums values,
+     * @return the corresponding Command enum if the first word of the input matches the enums values,
      *         or else return Command.UNKNOWN.
      */
     public static Enum of(String input) {
