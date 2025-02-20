@@ -145,7 +145,7 @@ public class Parser {
 
         Task task = tasks.getTask(markIndex - 1);
         if (!task.markAsDone()) {
-            throw new MiloIceException("This task has already been marked before");
+            throw new MiloIceException("This task has already been marked before :)");
         }
 
         return new ToggleMarkCommand(Enum.MARK, markIndex);
