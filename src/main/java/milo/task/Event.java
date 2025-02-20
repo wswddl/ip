@@ -51,6 +51,7 @@ public class Event extends Task {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime start = LocalDateTime.parse(stringStart, formatter);
             LocalDateTime end = LocalDateTime.parse(stringEnd, formatter);
+            validateTimeRange(start, end); // might throw MiloIceException
             return new Event(description, isDone, start, end);
 
         } catch (DateTimeParseException e) {
@@ -58,24 +59,16 @@ public class Event extends Task {
                     + "Example: 2031-01-01 0100");
         }
     }
-
-
-    public String changeStartTime(String newStringStart) throws MiloIceException {
+    public String[] changeStartAndEndTime(String newStringStart, String newStringEnd) throws MiloIceException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             start = LocalDateTime.parse(newStringStart, formatter);
-            return start.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
-        } catch (DateTimeParseException e) {
-            throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]\n"
-                    + "Example: 2031-01-01 0100");
-        }
-    }
-
-    public String changeEndTime(String newStringEnd) throws MiloIceException {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             end = LocalDateTime.parse(newStringEnd, formatter);
-            return end.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
+            validateTimeRange(start, end);
+            return new String[] {
+                    start.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a")),
+                    end.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"))
+            };
         } catch (DateTimeParseException e) {
             throw new MiloIceException("Invalid time format: Should be [yyyy-MM-dd HHmm]\n"
                     + "Example: 2031-01-01 0100");
@@ -87,6 +80,13 @@ public class Event extends Task {
     }
     public String getEndTime() {
         return end.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
+    }
+
+    private static void validateTimeRange(LocalDateTime start, LocalDateTime end) throws MiloIceException {
+        if (!end.isAfter(start)) {
+            // End time is the same as or before start time.
+            throw new MiloIceException("Silly, end time cannot be the same as or before start time");
+        }
     }
 
     /**
