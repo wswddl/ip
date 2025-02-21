@@ -239,6 +239,8 @@ public class Parser {
 
     private static Command handleRescheduleCommand(
             String[] parts, TaskList tasks) throws MiloIceException {
+        int correctDeadlineInputLength = 4;
+        int correctEventInputLength = 6;
 
         if (parts.length < 2) {
             throw new MiloIceException("Input should be: res [index number] [new time]");
@@ -257,7 +259,7 @@ public class Parser {
         }
 
         Task task = tasks.getTask(rescheduleIndex - 1);
-        if (task instanceof Deadline && parts.length != 4) {
+        if (task instanceof Deadline && parts.length != correctDeadlineInputLength) {
             // give instruction that follows the index number the user provided :)
             throw new MiloIceException("Invalid input format for rescheduling a deadline\n"
                             + "Correct format: res [index] [new deadline]\n"
@@ -265,12 +267,13 @@ public class Parser {
                             + "(task " + rescheduleIndex + " is a Deadline)");
 
         } else if (task instanceof Deadline) {
+            // have correct deadline input length, i.e. 4 words
             Deadline dl = (Deadline) task;
             String newStringDeadline = parts[2] + " " + parts[3];
             return new ChangeDeadlineCommand(dl, newStringDeadline);
 
 
-        } else if (task instanceof Event && parts.length != 6) {
+        } else if (task instanceof Event && parts.length != correctEventInputLength) {
             // give instruction that follows the index number the user provided :)
             throw new MiloIceException("Invalid input format for rescheduling an event:\n"
                             + "Correct format: res [index] [new start] [new end]\n"
@@ -278,6 +281,7 @@ public class Parser {
                             + "(task " + rescheduleIndex + " is an Event)");
 
         } else if (task instanceof Event) {
+            // have correct event input length, i.e. 6 words
             Event event = (Event) task;
             String newStringStart = parts[2] + " " + parts[3];
             String newStringEnd = parts[4] + " " + parts[5];
