@@ -23,7 +23,7 @@ public class Main extends Application {
         final int minWidth = 417;
         try {
             // change icon to milo ice image
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/DaDuke.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/DaMiloIce.png")));
             stage.setMinHeight(minHeight);
             stage.setMinWidth(minWidth);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
