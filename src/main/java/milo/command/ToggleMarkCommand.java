@@ -47,7 +47,7 @@ public class ToggleMarkCommand extends Command {
         } else if (taskEnum == Enum.UNMARK) {
             Task unmarkTask = tasks.getTask(toggleMarkIndex - 1);
             String smilingEmoji = "\uD83D\uDE0A";
-            this.commandResponse = "Nice! I've marked this task as done: " + smilingEmoji + "\n"
+            this.commandResponse = "Nice! I've marked this task as NOT done: " + smilingEmoji + "\n"
                     + unmarkTask;
         }
         storage.updateTask(tasks);
