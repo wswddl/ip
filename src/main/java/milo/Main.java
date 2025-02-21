@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private MiloIce miloIce = new MiloIce("./src/main/java/data/savedTasks.txt");
+    private MiloIce miloIce = new MiloIce("./data/savedTasks.txt");
 
     @Override
     public void start(Stage stage) {
@@ -23,7 +23,6 @@ public class Main extends Application {
         try {
             stage.setMinHeight(minHeight);
             stage.setMinWidth(minWidth);
-
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
