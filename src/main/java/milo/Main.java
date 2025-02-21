@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -21,6 +22,8 @@ public class Main extends Application {
         final int minHeight = 220;
         final int minWidth = 417;
         try {
+            // change icon to milo ice image
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/DaDuke.png")));
             stage.setMinHeight(minHeight);
             stage.setMinWidth(minWidth);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
