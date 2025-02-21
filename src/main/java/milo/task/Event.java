@@ -73,9 +73,12 @@ public class Event extends Task {
     public String[] changeStartAndEndTime(String newStringStart, String newStringEnd) throws MiloIceException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            start = LocalDateTime.parse(newStringStart, formatter);
-            end = LocalDateTime.parse(newStringEnd, formatter);
-            validateTimeRange(start, end);
+            LocalDateTime newStart = LocalDateTime.parse(newStringStart, formatter);
+            LocalDateTime newEnd = LocalDateTime.parse(newStringEnd, formatter);
+            validateTimeRange(newStart, newEnd);
+            // if valid and no exception thrown, then update the start and end
+            this.start = newStart;
+            this.end = newEnd;
             return new String[] {
                     start.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a")),
                     end.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"))
